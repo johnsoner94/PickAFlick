@@ -1,0 +1,50 @@
+import urllib2
+import requests
+import xlwt
+from BeautifulSoup import BeautifulSoup
+# or if you're using BeautifulSoup4:
+# from bs4 import BeautifulSoup
+
+def main():
+    getMovies()
+
+def getMovies():
+
+    url = 'http://www.imdb.com/chart/top?ref_=nv_wl_img_3'
+    response = requests.get(url)
+    html = response.content
+    soup = BeautifulSoup(html)
+    col = 0
+
+
+    for movies in soup.findAll(attrs={"class": "titleColumn"}, limit=2):
+        col = col + 1
+        newLink = (movies.a.get('href'))
+        newLink = newLink[:17]
+        newLink = "http://www.imdb.com" + newLink + "keywords"
+        #print newLink
+        getTags(col, newLink)
+
+def getTags(col, url):
+
+    response = requests.get(url)
+    html = response.content
+    soup = BeautifulSoup(html)
+
+    book = xlwt.Workbook(encoding="utf-8")
+
+    sheet1 = book.add_sheet("Sheet 1")
+
+    count = 0
+
+    for tag in soup.findAll(attrs={"class": "sodatext"}):
+        count = count + 1
+        #print count, tag.text
+        sheet1.write(count, col, tag.text)
+
+    book.save("test.xls")
+
+
+
+main()
+
