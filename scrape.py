@@ -1,16 +1,49 @@
-import MySQLdb # Import the ablility to put content into a database
+import psycopg2 # Imports access to database
 import urllib # Imports the ability to download files from URLs
 import urllib2 # Ability to use URLS
 import requests # IDK
-import xlwt # Import the ability to put content into a spreadsheet
-#from BeautifulSoup import BeautifulSoup # Import ability to scrape websites BeautifulSoup3
+#from datetime import datetime ## If you insist on getting release date to work, then use this.
+from BeautifulSoup import BeautifulSoup # Import ability to scrape websites BeautifulSoup3
 # or if you're using BeautifulSoup4:
-from bs4 import BeautifulSoup # Import ability to scrape websites BeautifulSoup4
+#from bs4 import BeautifulSoup # Import ability to scrape websites BeautifulSoup4 caused error
+
+
+NULL = None
+
+try:
+    conn = psycopg2.connect("dbname='template1' user='' host='localhost'")
+except:
+    print "I am unable to connect to the database"
+
+cur = conn.cursor()
+
 
 def main():
-    #conn = MySQLdb.connect("localhost", "root", "i0i#ICW)oYuk", "Movies")
-    getMovies()
-    #conn.close()
+    # Deletes table
+    #cur.execute("DROP TABLE movTest")
+    # Create table with release date
+    #cur.execute("CREATE TABLE movTest (id serial PRIMARY KEY, title varchar(255), year int, rating varchar(10), duration int, genre varchar(255), date date, poster varchar(255), directors varchar(255), creators varchar(255), actors varchar(255), tags varchar(255));")
+    # Create table without release date
+    #cur.execute("CREATE TABLE movTest (id serial PRIMARY KEY, title varchar(255), year int, rating varchar(10), duration int, genre varchar(255), poster varchar(255), directors varchar(255), creators varchar(255), actors varchar(255), tags varchar(255));")
+
+    #cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
+    #cur.execute("INSERT INTO test (num, data) VALUES (%s, %s)", (100, "abc'def"))
+    
+    #getMovies()
+
+    conn.commit()
+
+    printTable()
+
+
+def printTable():
+
+    cur.execute("SELECT * FROM movTest;")
+    rows = cur.fetchall()
+
+    for row in rows:
+        print row
+    
 
 def getMovies():
 
@@ -21,13 +54,13 @@ def getMovies():
     col = 0
 
 
-    for movies in soup.findAll(attrs={"class": "titleColumn"}, limit=4):
+    for movies in soup.findAll(attrs={"class": "titleColumn"}, limit=50):
         # Increases the column so that each movie has its own section in the database
         col = col + 1
 
         # Gets the information of each movies that is most easily accessible on the list of movies.
         title = movies.a.text
-        print title
+        print col, title
         year = movies.span.text
         year = year[1:5]
         #print year
@@ -41,16 +74,24 @@ def getMovies():
         
         # These call the methods that have to access the information in different parts of the movie's
         # individual page.
-        #getRating(col, newLink) 
-        #getDuration(col, newLink)
+        rating = getRating(col, newLink) 
+        dur = getDuration(col, newLink)
         #getGenre(col, newLink)
-        #getDate(col, newLink)
+        #date = getDate(col, newLink)
+        #print date
         #getDirector(col, newLink)
         #getCreators(col, newLink) # PROBLEM!!! NOT DONE!!!
         #print "\n"
         #getActor(col, newLink)
-        #getPoster(col, newLink, title)
+        poster = getPoster(col, newLink, title)
+        #print poster
         #getTags(col, newLink)
+
+
+        try:
+            cur.execute("INSERT INTO movTest (title, year, rating, duration, genre, poster, directors, creators, actors, tags) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (title, year, rating, dur, NULL, poster, NULL, NULL, NULL, NULL))
+        except:
+            print "Error adding movie to database"
         
 
 
@@ -62,7 +103,8 @@ def getRating(col, url):
     # In this case limit 1 is intentional and neccessary
     for rating in soup.findAll(attrs={"itemprop": "contentRating"}, limit=1):
         rate = rating.get('content')
-        print rate
+        #print rate
+        return rate
 
 
 def getDuration(col, url):
@@ -73,7 +115,9 @@ def getDuration(col, url):
     # In this case limit 1 is intentional and neccessary
     for dur in soup.findAll(attrs={"itemprop": "duration"}, limit=1):
         duration = dur.text
-        print duration
+        duration = duration.rstrip(" min")
+        #print duration
+        return duration
 
 
 def getGenre(col, url):
@@ -85,7 +129,7 @@ def getGenre(col, url):
         genre = gen.text
         print genre
 
-
+# No, I don't like this. It's not working.
 def getDate(col, url):
     response = requests.get(url)
     html = response.content
@@ -94,7 +138,8 @@ def getDate(col, url):
     # In this case limit 1 is intentional and neccessary
     for relDate in soup.findAll(attrs={"itemprop": "datePublished"}, limit=1):
         date = relDate.get('content')
-        print date
+        #print date
+        return date
 
 def getDirector(col, url):
     response = requests.get(url)
@@ -140,11 +185,13 @@ def getPoster(col, url, title):
     
     for img in soup.findAll("img", attrs={"height": "317"}):
         poster = img.get("src")
-        title = title.replace(' ', '')
-        location = "Posters/" + title + ".jpg"
-        print location
-        urllib.urlretrieve(poster, location)
+        #title = title.replace(' ', '')
+        #location = "Posters/" + title + ".jpg"
+        #print location
+        #urllib.urlretrieve(poster, location)
         #print poster
+        return poster
+        
 
 def getTags(col, url):
     
@@ -153,17 +200,17 @@ def getTags(col, url):
     html = response.content
     soup = BeautifulSoup(html)
 
-    #book = xlwt.Workbook(encoding="utf-8")
-    #sheet1 = book.add_sheet("Sheet 1")
+
 
     count = 0
 
     for tag in soup.findAll(attrs={"class": "sodatext"}, limit=1):
         count = count + 1
         print count, tag.text
-        #sheet1.write(count, col, tag.text)
+        #(count, col, tag.text)
 
-    #book.save("test.xls")
 
 
 main()
+cur.close()
+conn.close()
