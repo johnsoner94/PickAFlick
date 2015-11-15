@@ -19,43 +19,10 @@ cur = conn.cursor()
 
 
 def main():
-    
-    # Create table with release date
-    #cur.execute("CREATE TABLE movTest (id serial PRIMARY KEY, title varchar(255), year int, rating varchar(10), duration int, genre varchar(255), date date, poster varchar(255), directors varchar(255), creators varchar(255), actors varchar(255), tags varchar(255));")
-    # Create table without release date
-    #cur.execute("CREATE TABLE movTest (id serial PRIMARY KEY, title varchar(255), year int, rating varchar(10), duration int, genre varchar(255), poster varchar(255), directors varchar(255), creators varchar(255), actors varchar(255), tags varchar(255));")
-
-    #cur.execute("CREATE TABLE test2 (id serial PRIMARY KEY, num integer, data varchar);")
-    #cur.execute("INSERT INTO test2 (num, data) VALUES (%s, %s)", (100, "abc'def"))
-    #deleteTable("test2")
-
     getMovies()
-
+    
     conn.commit()
 
-    #Give the name of the table and will print it.
-    #printTable("test2")
-
-def deleteTable(table):
-    # Deletes table
-    command = "DROP TABLE " + table
-    cur.execute(command)
-    
-
-
-def printTable(table):
-    command = "SELECT * FROM " + table + ";"
-    try:
-        cur.execute(command)
-    except:
-        print "Cannot find table."
-        return
-
-    rows = cur.fetchall()
-
-    for row in rows:
-        print row
-    
 
 def getMovies():
 
@@ -66,7 +33,7 @@ def getMovies():
     col = 0
 
 
-    for movies in soup.findAll(attrs={"class": "titleColumn"}, limit=1):
+    for movies in soup.findAll(attrs={"class": "titleColumn"}, limit=10):
         # Increases the column so that each movie has its own section in the database
         col = col + 1
 
@@ -103,19 +70,18 @@ def getMovies():
         
 
 ## Parameter: Get the movie ID, Movie URL
-## TODO:      - See if the tag already exists, if so put the movie in the TAG_NAME table
-##            - If not, create a new tag with TAG_NAME_ID, TAG_NAME, TAG_TYPE, and MOVIE_ID
 def getTags(newLink, title, tableMovie, tableTag):
     ##SELECT column_name FROM table_name;
     if title.find("'") > -1:
         return
+    title = str(title)
     title = "\'" + title + "\'"
     command = "SELECT * FROM movTest WHERE title = " + title + ";"
-    #print command
     try:
         cur.execute(command)
     except:
         print "Cannot find column in the movie database."
+        print "Command that didn't work: " + command
         return
 
     rows = cur.fetchall()
@@ -188,59 +154,65 @@ def getGenre(movie_ID, url, title, tableTag):
 
     for gen in soup.findAll("span", attrs={"itemprop": "genre"}):
         genre = gen.text
-        genre = "\'" + genre + "\'"
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + genre + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
+        if genre.find("'") == -1:
+            genre = "\'" + genre + "\'"
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + genre + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
 
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
-        except:
-            print "Command failed"
-            return
-            
-        if exists == 0:
-            genre = genre.replace("\'","")
-            genre = str(genre)
-            try:
-                cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (genre, 'genre'))
-            except:
-                print "Adding the tag to the database didn't work"
-        else:
-            command = "SELECT * FROM tagTest WHERE name = " + genre + ";"
             try:
                 cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
             except:
-                print "Cannot find column in the tag database."
+                print "Command failed, genre"
                 return
-
-        rows = cur.fetchall()
-
-        for row in rows:
-            tag_ID = row[0]
                 
-        tag_ID = str(tag_ID)
-        movie_ID = str(movie_ID)
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
-            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + genre + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
             if exists == 0:
+                genre = genre.replace("\'","")
+                genre = str(genre)
                 try:
-                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (%s, %s);", (tag_ID, movie_ID))
-                    print command
+                    cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (genre, 'genre'))
+                    genre = "\'" + genre + "\'"
+                    command = "SELECT * FROM tagTest WHERE name = " + genre + ";"
                     cur.execute(command)
                 except:
-                    print "Error adding pair"
+                    print "Adding the tag to the database didn't work"
+                    print command
+                    return
             else:
-                return
-        except:
-            print "Error checking for pair"
+                command = "SELECT * FROM tagTest WHERE name = " + genre + ";"
+                try:
+                    cur.execute(command)
+                except:
+                    print "Cannot find column in the tag database."
+                    return
+
+            rows = cur.fetchall()
+
+            for row in rows:
+                tag_ID = row[0]
+                    
+            tag_ID = str(tag_ID)
+            movie_ID = str(movie_ID)
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
+            
+            try:
+                cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
+                command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + genre + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
+                if exists == 0:
+                    try:
+                        command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                        cur.execute(command)
+                    except:
+                        print "Error adding genre pair: " + command
+                else:
+                    return
+            except:
+                command = str(command)
+                print "Error checking for genre pair: " + command
 
 
 
@@ -252,63 +224,59 @@ def getDirector(movie_ID, url, title, tableTag):
     # In this case limit 1 is intentional and neccessary
     for direct in soup.findAll(attrs={"itemprop": "director"}):
         director = direct.a.text
-        director = "\'" + director + "\'"
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + director + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
-        except:
-            print "Command failed"
-            return
-
-        if exists == 0:
-            director = director.replace("\'","")
-            director = str(director)
-            try:
-                cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (director, 'director'))
-                director = "\'" + director + "\'"
-                cur.execute("SELECT * FROM tagTest WHERE name = " + director + ";")
-            except:
-                print "Adding the tag to the database didn't work"
-        else:
-            command = "SELECT * FROM tagTest WHERE name = " + director + ";"
+        if director.find("'") == -1:
+            director = "\'" + director + "\'"
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + director + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
             try:
                 cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
             except:
-                print "Cannot find column."
+                print "Command failed, director"
                 return
-
-        rows = cur.fetchall()
-
-        for row in rows:
-            tag_ID = row[0]
-
-        tag_ID = str(tag_ID)
-        movie_ID = str(movie_ID)
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
 
             if exists == 0:
+                director = director.replace("\'","")
+                director = str(director)
                 try:
-                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                    cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (director, 'director'))
+                    director = "\'" + director + "\'"
+                    cur.execute("SELECT * FROM tagTest WHERE name = " + director + ";")
+                except:
+                    print "Adding the tag to the database didn't work"
+            else:
+                command = "SELECT * FROM tagTest WHERE name = " + director + ";"
+                try:
                     cur.execute(command)
                 except:
-                    print "Error adding pair"
-            else:
-                return
-        except:
-            print "Error checking for pair"
+                    print "Cannot find column."
+                    return
 
+            rows = cur.fetchall()
 
+            for row in rows:
+                tag_ID = row[0]
 
+            tag_ID = str(tag_ID)
+            movie_ID = str(movie_ID)
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
+            try:
+                cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
 
-
+                if exists == 0:
+                    try:
+                        command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                        cur.execute(command)
+                    except:
+                        print "Error adding director pair: " + command
+                else:
+                    return
+            except:
+                print "Error checking for directoring pair: " + command
 
 
 
@@ -334,59 +302,63 @@ def getActor(movie_ID, url, title, tableTag):
     for stars in soup.findAll(attrs={"itemprop": "actor"}):
         count = count + 1
         actor = stars.text
-        actor = "\'" + actor + "\'"
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + actor + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
+        if actor.find("'") == -1:
+            actor = "\'" + actor + "\'"
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + actor + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
 
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
-        except:
-            print "Command failed"
-            return
-
-        if exists == 0:
-            actor = actor.replace("\'","")
-            actor = str(actor)
-            try:
-                cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (actor, 'actor'))
-                actor = "\'" + actor + "\'"
-                cur.execute("SELECT * FROM tagTest WHERE name = " + actor + ";")
-            except:
-                print "Adding the tag to the database didn't work"
-        else:
-            command = "SELECT * FROM tagTest WHERE name = " + actor + ";"
             try:
                 cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
             except:
-                print "Cannot find column."
+                print "Command failed, actor: " + command
                 return
-    
-        rows = cur.fetchall()
-
-        for row in rows:
-            tag_ID = row[0]
-
-        tag_ID = str(tag_ID)
-        movie_ID = str(movie_ID)
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
 
             if exists == 0:
+                actor = actor.replace("\'","")
                 try:
-                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                    actor = str(actor)
+                except:
+                    print actor
+                try:
+                    cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (actor, 'actor'))
+                    actor = "\'" + actor + "\'"
+                    cur.execute("SELECT * FROM tagTest WHERE name = " + actor + ";")
+                except:
+                    print "Adding the tag to the database didn't work"
+            else:
+                command = "SELECT * FROM tagTest WHERE name = " + actor + ";"
+                try:
                     cur.execute(command)
                 except:
-                    print "Error adding pair"
-            else:
-                return
-        except:
-            print "Error checking for pair"
+                    print "Cannot find column: " + command
+                    return
+        
+            rows = cur.fetchall()
+
+            for row in rows:
+                tag_ID = row[0]
+
+            tag_ID = str(tag_ID)
+            movie_ID = str(movie_ID)
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
+            try:
+                cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
+
+                if exists == 0:
+                    try:
+                        command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                        cur.execute(command)
+                    except:
+                        print "Error adding actor pair: " + command
+                else:
+                    return
+            except:
+                print "Error checking for actor pair: " + command
         
 
 def getKeywords(movie_ID, url, title, tableTag):
@@ -403,61 +375,63 @@ def getKeywords(movie_ID, url, title, tableTag):
     for tag in soup.findAll(attrs={"class": "sodatext"}):
         count = count + 1
         tag = str(tag.text)
-        tag = "\'" + tag + "\'"
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + tag + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
-        except:
-            print "Command failed"
-            return
-
-        if exists == 0:
-            tag = tag.replace("\'","")
-            tag = str(tag)
-            try:
-                cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (tag, 'keyword'))
-                tag = "\'" + tag + "\'"
-                cur.execute("SELECT * FROM tagTest WHERE name = " + tag + ";")
-            except:
-                print "Adding the tag to the database didn't work"
-                return
-        else:
-            command = "SELECT * FROM tagTest WHERE name = " + tag + ";"
+        if tag.find("'") == -1:
+            tag = "\'" + tag + "\'"
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + tag + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
             try:
                 cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
             except:
-                print "Cannot find column."
+                print "Command failed, keywords"
+                print command
                 return
-
-        rows = cur.fetchall()
-
-        for row in rows:
-            tag_ID = row[0]
-
-        tag_ID = str(tag_ID)
-        movie_ID = str(movie_ID)
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
 
             if exists == 0:
+                tag = tag.replace("\'","")
+                tag = str(tag)
                 try:
-                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
-                    cur.execute(command)
+                    cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (tag, 'keyword'))
+                    tag = "\'" + tag + "\'"
+                    cur.execute("SELECT * FROM tagTest WHERE name = " + tag + ";")
                 except:
-                    print "Error adding pair"
+                    print "Adding the tag to the database didn't work"
                     return
             else:
+                command = "SELECT * FROM tagTest WHERE name = " + tag + ";"
+                try:
+                    cur.execute(command)
+                except:
+                    print "Cannot find column."
+                    return
+
+            rows = cur.fetchall()
+
+            for row in rows:
+                tag_ID = row[0]
+
+            tag_ID = str(tag_ID)
+            movie_ID = str(movie_ID)
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
+            try:
+                cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
+
+                if exists == 0:
+                    try:
+                        command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                        cur.execute(command)
+                    except:
+                        print "Error adding keword pair: " + command
+                        return
+                else:
+                    return
+            except:
+                print "Error checking for keyword pair: " + command
                 return
-        except:
-            print "Error checking for pair"
-            return
 
 
 
@@ -467,6 +441,40 @@ conn.close()
 
 
 ## DUMP CODE
+
+# Create table with release date
+#cur.execute("CREATE TABLE movTest (id serial PRIMARY KEY, title varchar(255), year int, rating varchar(10), duration int, genre varchar(255), date date, poster varchar(255), directors varchar(255), creators varchar(255), actors varchar(255), tags varchar(255));")
+# Create table without release date
+#cur.execute("CREATE TABLE movTest (id serial PRIMARY KEY, title varchar(255), year int, rating varchar(10), duration int, genre varchar(255), poster varchar(255), directors varchar(255), creators varchar(255), actors varchar(255), tags varchar(255));")
+
+#cur.execute("CREATE TABLE test2 (id serial PRIMARY KEY, num integer, data varchar);")
+#cur.execute("INSERT INTO test2 (num, data) VALUES (%s, %s)", (100, "abc'def"))
+#deleteTable("test2")
+
+#Give the name of the table and will print it.
+#printTable("test2")
+
+##def deleteTable(table):
+##    # Deletes table
+##    command = "DROP TABLE " + table
+##    cur.execute(command)
+##    
+##
+##
+##def printTable(table):
+##    command = "SELECT * FROM " + table + ";"
+##    try:
+##        cur.execute(command)
+##    except:
+##        print "Cannot find table."
+##        return
+##
+##    rows = cur.fetchall()
+##
+##    for row in rows:
+##        print row
+
+
 ## Not sure this one is worth it.
 #date = getDate(col, newLink)
 #print date
