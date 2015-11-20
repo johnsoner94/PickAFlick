@@ -43,7 +43,7 @@ h3 {
 	text-shadow:2px 2px 0px #FFF;
 }
 
- 
+
 /*Code for navigation bar */
 
 .nav ul {
@@ -119,14 +119,14 @@ form {
 }
 
 
-/* SLIDER STRUCTURE */
+/* SLIDESHOW STRUCTURE */
 
 #slider {
    background: #000;
    border: 5px solid #eaeaea;
    box-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-   height: 360px;
    width: 230px;
+   height: 360px;
    margin: 20px auto 0;
    overflow: visible;
    position: relative;
@@ -150,9 +150,9 @@ form {
 #slider li {
 	
    width: 230px;  /* Width Image */
-   height: 320px; /* Height Image */
+   height: 360px; /* Height Image */
    position: absolute;
-   top: -325px; /* Original Position - Outside of the Slider */
+   top: -300px; /* Original Position - Outside of the Slider */
    list-style: none;
 }
 
@@ -180,9 +180,9 @@ form {
 /* ANIMATION */
 
 @keyframes cycle {
-   0%  { top: 25px; } /* When you start the slide, the first image is already visible */
-   4%  { top: 25px; } /* Original Position */
-   16% { top: 25px; opacity:1; z-index:0; } /* From 4% to 16 % = for 3 seconds the image is visible */
+   0%  { top: -93px; } /* When you start the slide, the first image is already visible */
+   4%  { top: -93px; } /* Original Position */
+   16% { top: -93px; opacity:1; z-index:0; } /* From 4% to 16 % = for 3 seconds the image is visible */
    20% { top: 300px; opacity: 0; z-index: 0; } /* From 16% to 20% = for 1 second exit image */
    21% { top: -300px; opacity: 0; z-index: -1; } /* Return to Original Position */
    92% { top: -300px; opacity: 0; z-index: 0; }
@@ -191,44 +191,44 @@ form {
 }
 
 @keyframes cycletwo {
-   0%  { top: -300px; opacity: 0; } /* Original Position */
-   16% { top: -300px; opacity: 0; }/* Starts moving after 16% to this position */
-   20% { top: 0px; opacity: 1; }
-   24% { top: 0px; opacity: 1; }  /* From 20% to 24% = for 1 second enter image*/
-   36% { top: 0px; opacity: 1; z-index: 0; }   /* From 24% to 36 % = for 3 seconds the image is visible */
-   40% { top: 300px; opacity: 0; z-index: 0; } /* From 36% to 40% = for 1 second exit image */
-   41% { top: -300px; opacity: 0; z-index: -1; }   /* Return to Original Position */
-   100%{ top: -300px; opacity: 0; z-index: -1; }
+   0%  { top: -323px; opacity: 0; } /* Original Position */
+   16% { top: -323px; opacity: 0; }/* Starts moving after 16% to this position */
+   20% { top: -93px; opacity: 1; }
+   24% { top: -93px; opacity: 1; }  /* From 20% to 24% = for 1 second enter image*/
+   36% { top: -93px; opacity: 1; z-index: 0; }   /* From 24% to 36 % = for 3 seconds the image is visible */
+   40% { top: 323px; opacity: 0; z-index: 0; } /* From 36% to 40% = for 1 second exit image */
+   41% { top: -323px; opacity: 0; z-index: -1; }   /* Return to Original Position */
+   100%{ top: -323px; opacity: 0; z-index: -1; }
 }
 
 @keyframes cyclethree {
-   0%  { top: -300px; opacity: 0; }
-   36% { top: -300px; opacity: 0; }
-   40% { top: 0px; opacity: 1; }
-   44% { top: 0px; opacity: 1; }
-   56% { top: 0px; opacity: 1; }
-   60% { top: 300px; opacity: 0; z-index: 0; }
-   61% { top: -300px; opacity: 0; z-index: -1; }
-   100%{ top: -300px; opacity: 0; z-index: -1; }
+   0%  { top: -323px; opacity: 0; }
+   36% { top: -323px; opacity: 0; }
+   40% { top: -93px; opacity: 1; }
+   44% { top: -93px; opacity: 1; }
+   56% { top: -93px; opacity: 1; }
+   60% { top: 323px; opacity: 0; z-index: 0; }
+   61% { top: -323px; opacity: 0; z-index: -1; }
+   100%{ top: -323px; opacity: 0; z-index: -1; }
 }
 
 @keyframes cyclefour {
-   0%  { top: -300px; opacity: 0; }
-   56% { top: -300px; opacity: 0; }
-   60% { top: 0px; opacity: 1; }
-   64% { top: 0px; opacity: 1; }
-   76% { top: 0px; opacity: 1; z-index: 0; }
-   80% { top: 300px; opacity: 0; z-index: 0; }
-   81% { top: -300px; opacity: 0; z-index: -1; }
-   100%{ top: -300px; opacity: 0; z-index: -1; }
+   0%  { top: -325px; opacity: 0; }
+   56% { top: -325px; opacity: 0; }
+   60% { top: -93px; opacity: 1; }
+   64% { top: -93px; opacity: 1; }
+   76% { top: -93px; opacity: 1; z-index: 0; }
+   80% { top: 325px; opacity: 0; z-index: 0; }
+   81% { top: -325px; opacity: 0; z-index: -1; }
+   100%{ top: -325px; opacity: 0; z-index: -1; }
 }
 @keyframes cyclefive {
-   0%  { top: -300px; opacity: 0; }
-   76% { top: -300px; opacity: 0; }
-   80% { top: 0px; opacity: 1; }
-   84% { top: 0px; opacity: 1; }
-   96% { top: 0px; opacity: 1; z-index: 0; }
-   100%{ top: 300px; opacity: 0; z-index: 0; }
+   0%  { top: -325px; opacity: 0; }
+   76% { top: -325px; opacity: 0; }
+   80% { top: -93px; opacity: 1; }
+   84% { top: -93px; opacity: 1; }
+   96% { top: -93px; opacity: 1; z-index: 0; }
+   100%{ top: 325px; opacity: 0; z-index: 0; }
 }
 
 /* PROGRESS BAR */
@@ -262,21 +262,21 @@ form {
    18%, 38%, 58%, 78%, 98% { width: 100%; opacity: 0; }
 }
 
-.tooltip {
-   background: rgba(0,0,0,0.7);
+#slider .tooltip { 
+   background: rgba(0,0,0,0.4);
    width: 230px;
    position: relative;
-   top: 320px;
-   height: 60px; /*this is the other problem with my code... */
-   left: -120px;
+   top: 360px;
+   height: 60px; 
+   left: 170px;
    transition: all 0.3s ease-in-out;
 }
 
-.tooltip h4 {
+#slider .tooltip h4 {
    color: #fff;
    font-size: 24px;
    font-weight: 300;
    line-height: 60px;
    padding: 0 0 0 10px;
+   font-family: "futura", sans-serif;
 }
-

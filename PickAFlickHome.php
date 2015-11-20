@@ -44,30 +44,30 @@
          			<ul>
                     
         <li id="first" class="firstanimation">  <!-- ID for tooltip and class for animation -->
-        <div class="tooltip"> <h4> #1 </h4></div>
-         <a href="#"> <img height=360px; width=230px; src="		http://www.impawards.com/1997/posters/george_of_the_jungle_ver3.jpg" alt="George"/> </a>
+         <div class="tooltip"> <h4> #1 </h4> </div>
+         <a href="#"> <img height=360px width=230px src="		http://www.impawards.com/1997/posters/george_of_the_jungle_ver3.jpg" alt="George"/> </a>
 
          </li>
 
          <li id="second" class="secondanimation">
          <div class="tooltip"> <h4> #2 </h4> </div>
-         <a href="#"> <img height=360px; width=230px;  src="http://ia.media-imdb.com/images/M/MV5BMjM5Mzg5NjA0Nl5BMl5BanBnXkFtZTcwMjg3MDEyMw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg" alt="Furry"/> </a>
+         <a href="#"> <img height=360px width=230px  src="http://ia.media-imdb.com/images/M/MV5BMjM5Mzg5NjA0Nl5BMl5BanBnXkFtZTcwMjg3MDEyMw@@._V1_UY1200_CR90,0,630,1200_AL_.jpg" alt="Furry"/> </a>
          </li>
 
          <li id="third" class="thirdanimation">
          <div class="tooltip"> <h4> #3 </h4></div>
-         <a href="#"> <img height=360px; width=230px; src="http://ia.media-imdb.com/images/M/MV5BMTY1OTgyNTI2OV5BMl5BanBnXkFtZTcwNDUxMDQyMQ@@._V1_SY317_CR4,0,214,317_AL_.jpg" alt="breathing"/> </a>
+         <a href="#"> <img height=360px width=230px src="http://ia.media-imdb.com/images/M/MV5BMTY1OTgyNTI2OV5BMl5BanBnXkFtZTcwNDUxMDQyMQ@@._V1_SY317_CR4,0,214,317_AL_.jpg" alt="breathing"/> </a>
 
          </li>
 
          <li id="fourth" class="fourthanimation">
-         <div class="description"> #4 </div>
+         <div class="tooltip"><h4>  #4 </h4></div>
          <a href="#"> <img height=360px; width=230px; src="http://ecx.images-amazon.com/images/I/51BXhPusZIL._SY355_.jpg" alt="Man"/> </a>
 
          </li>
 
          <li id="fifth" class="fifthanimation">
-         <div class="tooltip"> #5 </div>
+         <div class="tooltip"><h4>  #5 </h4></div>
          <a href="#"> <img height=360px; width=230px;  src="http://i43.tower.com/images/mm107062438/monkeybone-brendan-fraser-dvd-cover-art.jpg" alt="Monkey"/> </a>
 
          </li>
