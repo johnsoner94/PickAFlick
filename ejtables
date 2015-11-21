@@ -1,0 +1,48 @@
+
+
+drop table movtest;
+drop table pairingtest;
+drop table tagtest;
+
+CREATE TABLE movtest (
+    id integer NOT NULL,
+    title character varying(255),
+    year integer,
+    rating character varying(10),
+    duration integer,
+    poster character varying(255),
+    PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE pairingtest (
+    id integer NOT NULL,
+    tag_id integer,
+    movie_id integer, 
+    PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE tagtest (
+    id integer NOT NULL,
+    name character varying(255),
+    type character varying(255),
+    PRIMARY KEY (id)
+);
+
+
+
+-- CREATE TABLE test (
+--     id integer NOT NULL,
+--      num integer,
+--     data character varying
+-- 
+
+
+
+
+
+-- INSERT INTO movtest (id, title, year, rating, duration, poster) values 
+-- (1,'The Shawshank Redemption',1994,'R',142,'http://ia.media-imdb.com/images/M/MV5BODU4MjU4NjIwNl5BMl5BanBnXkFtZTgwMDU2MjEyMDE@._V1_SX214_AL_.jpg');

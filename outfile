@@ -27,18 +27,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+--COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
-SET search_path = public, pg_catalog;
+-- SET search_path = public, pg_catalog;
 
-SET default_tablespace = '';
+-- SET default_tablespace = '';
 
-SET default_with_oids = false;
+-- SET default_with_oids = false;
 
 --
 -- Name: movtest; Type: TABLE; Schema: public; Owner: ejohnson; Tablespace: 
 --
+
+USE pickaflick;
 
 CREATE TABLE movtest (
     id integer NOT NULL,
@@ -50,7 +52,7 @@ CREATE TABLE movtest (
 );
 
 
-ALTER TABLE movtest OWNER TO ejohnson;
+-- ALTER TABLE movtest OWNER TO ejohnson;
 
 --
 -- Name: movtest_id_seq; Type: SEQUENCE; Schema: public; Owner: ejohnson
@@ -64,7 +66,7 @@ CREATE SEQUENCE movtest_id_seq
     CACHE 1;
 
 
-ALTER TABLE movtest_id_seq OWNER TO ejohnson;
+-- ALTER TABLE movtest_id_seq OWNER TO ejohnson;
 
 --
 -- Name: movtest_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ejohnson
@@ -84,7 +86,7 @@ CREATE TABLE pairingtest (
 );
 
 
-ALTER TABLE pairingtest OWNER TO ejohnson;
+-- ALTER TABLE pairingtest OWNER TO ejohnson;
 
 --
 -- Name: pairingtest_id_seq; Type: SEQUENCE; Schema: public; Owner: ejohnson
@@ -98,7 +100,7 @@ CREATE SEQUENCE pairingtest_id_seq
     CACHE 1;
 
 
-ALTER TABLE pairingtest_id_seq OWNER TO ejohnson;
+-- ALTER TABLE pairingtest_id_seq OWNER TO ejohnson;
 
 --
 -- Name: pairingtest_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ejohnson
@@ -118,7 +120,7 @@ CREATE TABLE tagtest (
 );
 
 
-ALTER TABLE tagtest OWNER TO ejohnson;
+-- ALTER TABLE tagtest OWNER TO ejohnson;
 
 --
 -- Name: tagtest_id_seq; Type: SEQUENCE; Schema: public; Owner: ejohnson
@@ -132,7 +134,7 @@ CREATE SEQUENCE tagtest_id_seq
     CACHE 1;
 
 
-ALTER TABLE tagtest_id_seq OWNER TO ejohnson;
+-- ALTER TABLE tagtest_id_seq OWNER TO ejohnson;
 
 --
 -- Name: tagtest_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ejohnson
@@ -152,7 +154,7 @@ CREATE TABLE test (
 );
 
 
-ALTER TABLE test OWNER TO ejohnson;
+-- ALTER TABLE test OWNER TO ejohnson;
 
 --
 -- Name: test_id_seq; Type: SEQUENCE; Schema: public; Owner: ejohnson
@@ -166,7 +168,7 @@ CREATE SEQUENCE test_id_seq
     CACHE 1;
 
 
-ALTER TABLE test_id_seq OWNER TO ejohnson;
+-- ALTER TABLE test_id_seq OWNER TO ejohnson;
 
 --
 -- Name: test_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ejohnson
