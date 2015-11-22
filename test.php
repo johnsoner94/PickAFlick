@@ -30,7 +30,7 @@
 	// ... first we'll retrieve the basic information
 	//		including the name of the state where it is registered.
 	
-	$query = "SELECT * FROM pickaflick WHERE id=" . $movieId;
+	$query = "SELECT * FROM movtest WHERE id=" . $movieId;
 	
 	$result = mysql_query($query);
 	error_check($result);
@@ -71,7 +71,7 @@
 	
 	// ... now lets get the cars equipment
 	
-	$query = "SELECT * FROM pickaflick WHERE id =" . $movieId;
+	$query = "SELECT * FROM movtest WHERE id =" . $movieId;
 	
 	$result = mysql_query($query);
 	error_check($result);
