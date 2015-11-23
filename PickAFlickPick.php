@@ -26,30 +26,39 @@
       </ul>
     </div>
   </header> 
-  
-  <h2> What are you feeling like? </h2>
-  	
-    <!-- Aliya, I am not really sure what to do here since I don't remember your awesome 
-    form from yesterday.I did it without the drop downs because I am not sure if we can 
-    frasibly do that. This  was my best guess (and my best guess for the action= 
-    part and how to set up PHP as well -->
-  	<form action="pick.php" method="post" style="margin:5px"> 
 
-		What genre are you feeling like? <input type="text" name="genre"/>
-        
-        <br/>What mood are you in? <input type="text" name="mood"/>
+<form action="movieResults.php" method="post" id = "movie" >
 
-		<br/>How recent should it be? <input type="text" name="date"/> 
+	I want to watch a movie which is
+	<select name ="question1" form="movie" >
+	<option value = ""  > choose your era </option>	
+	<option value = "1"  > way back when   </option>	
+	<option value = "2"  > from your parent's childhood  </option>	
+	<option value = "3"  > from your childhood  </option>
+	<option value = "4"  > recent  </option>
+	<option value = "5"  > newly released  </option>
+	</select> 
+	
+	that I can watch with 
+	<select name ="question2" form="movie" >
+	<option value = ""  > choose the rating </option>	
+	<option value = "G"  >  my baby cousins  </option>	
+	<option value = "PG"  >  my brother   </option>	
+	<option value = "PG-13"  > my parents  </option>
+	<option value = "R"  >  my friends  </option>
+	<option value = "UNRATED"  >  myself  </option>
+	</select> 
+	
+	for  
+	<select name ="question3" form="movie" >
+	<option value = ""  > choose the length </option>	
+	<option value = "1"  >   a short period of time  </option>	
+	<option value = "2"  >  lots of time   </option>	
+	</select> 
+	.
 
-		<br/> Any specific actor? <input type="text" name="actor"/> 
-
-		<br/>Any specific director?  <input type="text" name="director"/> 
-
-		<br/>Are you by yourself or with others? <input type="text" name="company"/> 
-
-		<br/> Do you want it to be about a holiday? Which? <input type="text" name="holiday"/> 
-
-		<br/><input type="submit"/>
+		
+<br/><input type="submit"/>
 
 	</form>
 	
