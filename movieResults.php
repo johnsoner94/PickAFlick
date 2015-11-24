@@ -101,7 +101,7 @@
 	for($row_num = 0; $row_num < $num_rows; $row_num++) {
 		reset($row);
 		for ($field_num = 0; $field_num < $num_fields / 2; $field_num++){
-			//echo $row[$field_num];
+			echo $row[$field_num];
 			print "<img src= '$row[$field_num]''alt='moviePoster' width='300' height='500'>";
 			$row = mysql_fetch_array($result);
 		}
