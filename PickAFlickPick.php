@@ -5,7 +5,6 @@
 <title>Pick A Flick!</title>
 <link href="PickAFlick.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
   <header>
 	<h1 class='retroshadow'> Pick A Flick </h1> 
@@ -31,7 +30,7 @@
 
 	I want to watch a movie which is
 	<select name ="question1" form="movie" >
-	<option value = ""  > choose your era </option>	
+	<option value = ""   > choose your era </option>	
 	<option value = "1"  > way back when   </option>	
 	<option value = "2"  > from your parent's childhood  </option>	
 	<option value = "3"  > from your childhood  </option>

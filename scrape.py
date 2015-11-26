@@ -40,8 +40,8 @@ def getMovies():
         # Gets the information of each movies that is most easily accessible on the list of movies.
         title = movies.a.text
         title = title.replace("'", "''");
-        
-        #print col, title
+
+        print col, title
         year = movies.span.text
         year = year[1:5]
         #print year
@@ -57,7 +57,7 @@ def getMovies():
         # individual page.
         #rating = getRating(col, newLink) 
         #dur = getDuration(col, newLink)
-        getPoster(col, newLink, title)
+        #getPoster(col, newLink, title)
         #poster = getPoster(col, newLink, title)
         #print poster
 
@@ -68,7 +68,7 @@ def getMovies():
 ##            print "Error adding movie to database"
 
         #if col == 6:
-        #getTags(newLink, title, "movTest", "tagTest")
+        getTags(newLink, title, "movTest", "tagTest")
         
 
 ## Parameter: Get the movie ID, Movie URL
@@ -100,7 +100,7 @@ def getTags(newLink, title, tableMovie, tableTag):
 ##        print "Make new tag add the movie id"
     getGenre(movie_ID, newLink, title, "tagTest")
     getDirector(movie_ID, newLink, title, "tagTest")
-    #getCreators(col, newLink) # PROBLEM!!! NOT DONE!!!
+    getCreators(movie_ID, newLink, title, "tagTest")
     #print "\n"
     getActor(movie_ID, newLink, title, "tagTest")
     getKeywords(movie_ID, newLink, title, "tagTest")
@@ -179,7 +179,7 @@ def getGenre(movie_ID, url, title, tableTag):
             return
             
         if exists == 0:
-            genre = genre[1, -1]
+            genre = genre[1: -1]
             genre = str(genre)
             try:
                 cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (genre, 'genre'))
@@ -248,7 +248,7 @@ def getDirector(movie_ID, url, title, tableTag):
             return
 
         if exists == 0:
-            director = director[1, -1]
+            director = director[1: -1]
             director = str(director)
             try:
                 cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (director, 'director'))
@@ -291,15 +291,74 @@ def getDirector(movie_ID, url, title, tableTag):
 
 
 
-# PROBLEM!!! NOT DONE!!!
-def getCreators(col, url):
+# There's an error in the logic. If a name has already been added as a tag under one category, it is not readded under the new category. (ie Frank Darabont is both a director
+# and a writter for The Shawshank Redemption, but he'll only be credited as a writer.) If I were to fix this method, I think all of the other methods would have to be modified
+# to be able to be cross referenced.
+def getCreators(movie_ID, url, title, tableTag):
     response = requests.get(url)
     html = response.content
     soup = BeautifulSoup(html)
 
-    for create in soup.findAll("div", attrs={"itemprop": "creator"}):
-        creator = create.span.text
-        print creator
+    for create in soup.findAll("span", attrs={"itemprop": "name"}):
+        prev = ""
+        names = create.parent.parent.attrs
+        for writers in names:
+            check = str(writers[1])
+            if prev == "txt-block":
+                if "creator" == check:
+                    creator = create.text
+                    creator = creator.replace("'", "''")
+                    creator = "'" + creator + "'"
+                    command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + creator + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
+                    try:
+                        cur.execute(command)
+                        result = cur.fetchall()[0]
+                        exists = result[0]
+                        exists = int(exists)
+                    except:
+                        print "Command failed, creator"
+
+                    if exists == 0:
+                        creator = str(creator)
+                        creator = creator[1: -1]
+                        try:
+                            cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (creator, 'creator'))
+                            creator = "'" + creator + "'"
+                            cur.execute("SELECT * FROM tagTest WHERE name = " + creator + ";")
+                        except:
+                            print "Adding the tag to the database didn't work"
+                    else:
+                        command = "SELECT * FROM tagTest WHERE name = " + creator + ";"
+                        try:
+                            cur.execute(command)
+                        except:
+                            print "Cannot find column."
+
+                    rows = cur.fetchall()
+
+                    for row in rows:
+                        tag_ID = row[0]
+
+                    tag_ID = str(tag_ID)
+                    movie_ID = str(movie_ID)
+                    command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
+                    try:
+                        cur.execute(command)
+                        result = cur.fetchall()[0]
+                        exists = result[0]
+                        exists = int(exists)
+
+                        if exists == 0:
+                            try:
+                                command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                                cur.execute(command)
+                            except:
+                                print "Error adding creator pair: " + command
+                        else:
+                            print "Does exist"
+                    except:
+                        print "Error checking for creating pair: " + command
+            prev = check
     
 # Right now it only returns the top 15 actors in the movie.
 def getActor(movie_ID, url, title, tableTag):
@@ -327,7 +386,7 @@ def getActor(movie_ID, url, title, tableTag):
             return
 
         if exists == 0:
-            actor = actor[1, -1]
+            actor = actor[1: -1]
             try:
                 actor = str(actor)
             except:
@@ -400,7 +459,7 @@ def getKeywords(movie_ID, url, title, tableTag):
             return
 
         if exists == 0:
-            tag = tag[1, -1]
+            tag = tag[1: -1]
             tag = str(tag)
             try:
                 cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (tag, 'keyword'))
