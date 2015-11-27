@@ -20,7 +20,7 @@ h1 {
 h1.retroshadow {
   color: #1996B5;
   background-color: #e7e5e4;
-  letter-spacing: .05em;
+  letter-spacing: .24em;
   text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -28,6 +28,7 @@ h1:hover {
   color: #5BD3F8;
 }
  
+/* Code for all other text */ 
 h2 {
 	font-family: "Avant Garde", sans-serif;
 	color: #FFF;
