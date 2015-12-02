@@ -104,7 +104,7 @@
 		print "<center> ";
 		echo "You want to watch a ".$_SESSION['question1']." that was rated ".$_SESSION['question2']." and was released in".$_SESSION['question3'].".";
 		print "</center>";
-		$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name = '".$_SESSION['question1']."' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year - '".$_SESSION['question3']."'";
+		$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name = '".$_SESSION['question1']."' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year = '".$_SESSION['question3']."'";
 		$result = mysql_query($query);
 		error_check($result);
 		runQuery($result);
