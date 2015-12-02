@@ -27,6 +27,8 @@
   
   <h2> Welcome to Pick A Flick, a movie generator based on your personal mood and interests. </h2>
   
+  <h3> Make sure to <a href="PickAFlickPick.php">Take Your Pick!</h3>a>
+  
   <table style="width:100%">
 	<tr>
 		<td>

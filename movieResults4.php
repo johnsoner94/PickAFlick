@@ -17,7 +17,6 @@
         	<li class="help"><a href="#">Help</a></li>
 			<li>
             
-			<!-- Aliya, this is code we could potentially use with the database if you'd like -->
 			<form>
                    <input type="text" placeholder="Search..." required>
                    <input type="button" value="Search">
@@ -79,7 +78,7 @@
  	
 ?>
 
-<form action="movieResults5.php" method="post" id = "movie" >
+<form action="movieResults5.php" method="post" id = "movie" class="pick">
 
 	Which year would you like? 
 	<select name ="question3" form="movie" >

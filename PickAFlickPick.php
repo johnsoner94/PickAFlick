@@ -15,8 +15,7 @@
         	<li class="profile"><a href="PickAFlickProfile.php">My Profile</a></li>
         	<li class="help"><a href="#">Help</a></li>
 			<li>
-            
-			<!-- Aliya, this is code we could potentially use with the database if you'd like -->
+
 			<form>
                    <input type="text" placeholder="Search..." required>
                    <input type="button" value="Search">
@@ -68,7 +67,7 @@
 	?>
 
 
-<form action="movieResults3.php" method="post" id = "movie" >
+<form action="movieResults3.php" method="post" id = "movie" class="pick">
 
 	I want to watch a 
 	<select name ="question1" form="movie" >

@@ -17,7 +17,6 @@
         	<li class="help"><a href="#">Help</a></li>
 			<li>
             
-			<!-- Aliya, this is code we could potentially use with the database if you'd like -->
 			<form>
                    <input type="text" placeholder="Search..." required>
                    <input type="button" value="Search">
