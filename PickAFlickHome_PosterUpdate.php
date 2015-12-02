@@ -29,9 +29,7 @@
   <table style="width:100%">
 	<tr>
 		<td>
-        <h2> Whatever we want to put here!! </h2>
-        
-        <h2> Maybe results of webscraping movie news site? </h2>
+        <h2> Looking to get ready for the Holiday season? Check out these seasonal favorites!  </h2>
         </td>
    
 		<td>
