@@ -30,6 +30,10 @@
 	<tr>
 		<td>
         <h2> Looking to get ready for the Holiday season? Check out these seasonal favorites!  </h2>
+        <img src="http://www.mainelights.org/images/lights03a.gif" alt="Christmas Lights">
+        
+        <!--This is where Christmas movies will be once they are scraped and put into the database-->
+        
         </td>
    
 		<td>
