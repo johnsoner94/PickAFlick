@@ -69,9 +69,9 @@
 
 <form action="movieResults3.php" method="post" id = "movie" class="pick">
 
-	I want to watch a 
+	<h4>I want to watch a... <h4>
 	<select name ="question1" form="movie" >
-	<option value = ""> select a genre </option> 
+	<option value = ""> Select your genre </option> 
 		<?php
 		$query = "SELECT name FROM tagtest WHERE type LIKE '%genre%' ORDER BY name ASC" ;
 		$result = mysql_query($query);

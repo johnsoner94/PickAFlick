@@ -82,7 +82,7 @@
 	
 	<form action="movieResults4.php" method="post" id = "movie" >
 
-	Pick a rating 
+	<h4>I want it to be rated...</h4>
 	<select name ="question2" form="movie" >
 	<?php
 	session_start();
