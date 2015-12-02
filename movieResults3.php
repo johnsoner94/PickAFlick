@@ -66,8 +66,8 @@
 	 
 	for($row_num = 0; $row_num < $num_rows; $row_num++) {
 		reset($row);
-		for ($field_num = 0; $field_num < $num_fields / 2; $field_num++)
-			print "<option value = '$row[$field_num]'>  $row[$field_num] </option>";
+		for ($field_num = 0; $field_num < $num_fields / 2; $field_num++){
+			print "<option value = '$row[$field_num]'>  $row[$field_num] </option>";}
 			$row = mysql_fetch_array($result);
 		}
 		print "</select>";
@@ -80,7 +80,7 @@
 	
 	
 	
-	<form action="movieResults4.php" method="post" id = "movie" >
+	<form action="movieResults4.php" method="post" id = "movie" class="pick">
 
 	<h4>I want it to be rated...</h4>
 	<select name ="question2" form="movie" >
