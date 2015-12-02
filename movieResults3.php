@@ -14,8 +14,8 @@
       	<ul>
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>
         	<li class="profile"><a href="PickAFlickProfile.php">My Profile</a></li>
+            <li class="pick"><a href="PickAFlickPick.php">Pick</a></li>
         	<li class="help"><a href="#">Help</a></li>
-			<li>
             
 			<!-- Aliya, this is code we could potentially use with the database if you'd like -->
 			<form>

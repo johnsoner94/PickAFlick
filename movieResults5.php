@@ -14,8 +14,8 @@
       	<ul>
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>
         	<li class="profile"><a href="PickAFlickProfile.php">My Profile</a></li>
+            <li class="pick"><a href="PickAFlickPick.php">Pick</a></li>
         	<li class="help"><a href="#">Help</a></li>
-			<li>
             
 			<form>
                    <input type="text" placeholder="Search..." required>
@@ -101,7 +101,7 @@
 
 		<?php
 		print "<center> ";
-		echo "You want to watch a ".$_SESSION['question1']." that was rated ".$_SESSION['question2']." and was released in".$_SESSION['question3'].".";
+		echo "You want to watch a ".$_SESSION['question1']." that was rated ".$_SESSION['question2']." and was released in ".$_SESSION['question3'].".";
 		print "</center>";
 		$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name = '".$_SESSION['question1']."' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year = '".$_SESSION['question3']."'";
 		$result = mysql_query($query);
