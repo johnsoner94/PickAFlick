@@ -89,7 +89,7 @@
 		$_SESSION['question2'] = $_POST["question2"];
 
 	
-		$query = "SELECT DISTINCT movtest.year FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name LIKE '%".$_SESSION['question1']."%' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' ORDER BY movtest.year";
+		$query = "SELECT DISTINCT movtest.year FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name = '".$_SESSION['question1']."' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' ORDER BY movtest.year";
 		$result = mysql_query($query);
 		error_check($result);
 		runQuery($result);
