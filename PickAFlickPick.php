@@ -5,6 +5,7 @@
 <title>Pick A Flick!</title>
 <link href="PickAFlick.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
   <header>
 	<h1 class='retroshadow'> Pick A Flick </h1> 
@@ -25,38 +26,61 @@
       </ul>
     </div>
   </header> 
-
-<form action="movieResults.php" method="post" id = "movie" >
-
-	I want to watch a movie which is
-	<select name ="question1" form="movie" >
-	<option value = ""   > choose your era </option>	
-	<option value = "1"  > way back when   </option>	
-	<option value = "2"  > from your parent's childhood  </option>	
-	<option value = "3"  > from your childhood  </option>
-	<option value = "4"  > recent  </option>
-	<option value = "5"  > newly released  </option>
-	</select> 
+<?php
+	// checks if query can be executed 
+	function error_check($query_result) {
+		if(!$query_result) {
+			print "Error - the query could not be executed";
+			$error = mysql_error();
+			print "<p>" . $error . "</p>";
+			exit;
+		}
+	}
 	
-	that I can watch with 
-	<select name ="question2" form="movie" >
-	<option value = ""  > choose the rating </option>	
-	<option value = "G"  >  my baby cousins  </option>	
-	<option value = "PG"  >  my brother   </option>	
-	<option value = "PG-13"  > my parents  </option>
-	<option value = "R"  >  my friends  </option>
-	<option value = "UNRATED"  >  myself  </option>
-	</select> 
+	// Connect to MySQL
+	$db = mysql_connect("localhost", "ag249083", "ag249083");
+	if (!db) {
+		print "Error - Could not Connect to MySQL";
+		exit;
+	}
 	
-	for  
-	<select name ="question3" form="movie" >
-	<option value = ""  > choose the length </option>	
-	<option value = "1"  >   a short period of time  </option>	
-	<option value = "2"  >  lots of time   </option>	
-	</select> 
-	.
-
+	// Select the movie database
+	$er = mysql_select_db("pickaflick");
+	if (!$er) {
+		print "Error - Could not select the cars database";
+		exit;
+	}
 		
+	function runQuery($result){
+	$row = mysql_fetch_array($result);
+	$num_fields = sizeof($row);
+	$num_rows = mysql_num_rows($result);
+	
+	 
+	for($row_num = 0; $row_num < $num_rows; $row_num++) {
+		reset($row);
+		for ($field_num = 0; $field_num < $num_fields / 2; $field_num++)
+			print "<option value = '$row[$field_num]'>  $row[$field_num] </option>";
+			$row = mysql_fetch_array($result);
+		}
+		print "</select>";
+	}
+	?>
+
+
+<form action="movieResults3.php" method="post" id = "movie" >
+
+	I want to watch a 
+	<select name ="question1" form="movie" >
+	<option value = ""> select a genre </option> 
+		<?php
+		$query = "SELECT name FROM tagtest WHERE type LIKE '%genre%' ORDER BY name ASC" ;
+		$result = mysql_query($query);
+		error_check($result);
+		runQuery($result);
+		?>
+	</select>
+				
 <br/><input type="submit"/>
 
 	</form>
