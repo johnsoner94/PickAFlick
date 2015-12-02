@@ -74,7 +74,10 @@ def getMovies():
 ## Parameter: Get the movie ID, Movie URL
 def getTags(newLink, title, tableMovie, tableTag):
     ##SELECT column_name FROM table_name;
-    title = str(title)
+    try:
+        title = str(title)
+    except:
+        print "Error converting " , type(title) , " to a string."
     title = "'" + title + "'"
     command = "SELECT * FROM movTest WHERE title = " + title + ";"
     try:
@@ -98,12 +101,11 @@ def getTags(newLink, title, tableMovie, tableTag):
 ##        cur.execute(command)
 ##    except:
 ##        print "Make new tag add the movie id"
-    getGenre(movie_ID, newLink, title, "tagTest")
-    getDirector(movie_ID, newLink, title, "tagTest")
-    getCreators(movie_ID, newLink, title, "tagTest")
-    #print "\n"
-    getActor(movie_ID, newLink, title, "tagTest")
-    getKeywords(movie_ID, newLink, title, "tagTest")
+        getGenre(movie_ID, newLink, title, "tagTest")
+        getDirector(movie_ID, newLink, title, "tagTest")
+        getCreators(movie_ID, newLink, title, "tagTest")
+        getActor(movie_ID, newLink, title, "tagTest")
+        getKeywords(movie_ID, newLink, title, "tagTest")
 
 def getRating(col, url):
     response = requests.get(url)
@@ -180,7 +182,10 @@ def getGenre(movie_ID, url, title, tableTag):
             
         if exists == 0:
             genre = genre[1: -1]
-            genre = str(genre)
+            try:
+                genre = str(genre)
+            except:
+                print "Error converting " , type(genre) , " to a string."
             try:
                 cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (genre, 'genre'))
                 genre = "'" + genre + "'"
@@ -203,27 +208,35 @@ def getGenre(movie_ID, url, title, tableTag):
         for row in rows:
             tag_ID = row[0]
                 
-        tag_ID = str(tag_ID)
-        movie_ID = str(movie_ID)
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
-            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + genre + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
-            if exists == 0:
-                try:
-                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
-                    cur.execute(command)
-                except:
-                    print "Error adding genre pair: " + command
-            else:
-                return
-        except:
-            command = str(command)
-            print "Error checking for genre pair: " + command
+            try:
+                tag_ID = str(tag_ID)
+            except:
+                print "Error converting " , type(tag_ID) , " to a string."
+
+            try:
+                movie_ID = str(movie_ID)
+            except:
+                print "Error converting " , type(movie_ID) , " to a string."
+                
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
+            
+            try:
+                cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
+                command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + genre + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
+                if exists == 0:
+                    try:
+                        command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                        cur.execute(command)
+                    except:
+                        print "Error adding genre pair: " + command
+                else:
+                    return
+            except:
+                command = str(command)
+                print "Error checking for genre pair: " + command
 
 
 
@@ -249,7 +262,10 @@ def getDirector(movie_ID, url, title, tableTag):
 
         if exists == 0:
             director = director[1: -1]
-            director = str(director)
+            try:
+                director = str(director)
+            except:
+                print "Error converting " , type(director) , " to a string."
             try:
                 cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (director, 'director'))
                 director = "'" + director + "'"
@@ -269,25 +285,32 @@ def getDirector(movie_ID, url, title, tableTag):
         for row in rows:
             tag_ID = row[0]
 
-        tag_ID = str(tag_ID)
-        movie_ID = str(movie_ID)
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
+            try:
+                tag_ID = str(tag_ID)
+            except:
+                print "Error converting " , type(tag_ID) , " to a string."
 
-            if exists == 0:
-                try:
-                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
-                    cur.execute(command)
-                except:
-                    print "Error adding director pair: " + command
-            else:
-                return
-        except:
-            print "Error checking for directoring pair: " + command
+            try:
+                movie_ID = str(movie_ID)
+            except:
+                print "Error converting " , type(movie_ID) , " to a string."
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
+            try:
+                cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
+
+                if exists == 0:
+                    try:
+                        command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                        cur.execute(command)
+                    except:
+                        print "Error adding director pair: " + command
+                else:
+                    return
+            except:
+                print "Error checking for directoring pair: " + command
 
 
 
@@ -319,7 +342,10 @@ def getCreators(movie_ID, url, title, tableTag):
                         print "Command failed, creator"
 
                     if exists == 0:
-                        creator = str(creator)
+                        try:
+                            creator = str(creator)
+                        except:
+                            print "Error converting " , type(creator) , " to a string."
                         creator = creator[1: -1]
                         try:
                             cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (creator, 'creator'))
@@ -339,25 +365,32 @@ def getCreators(movie_ID, url, title, tableTag):
                     for row in rows:
                         tag_ID = row[0]
 
-                    tag_ID = str(tag_ID)
-                    movie_ID = str(movie_ID)
-                    command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
-                    try:
-                        cur.execute(command)
-                        result = cur.fetchall()[0]
-                        exists = result[0]
-                        exists = int(exists)
+                        try:
+                            tag_ID = str(tag_ID)
+                        except:
+                            print "Error converting " , type(tag_ID) , " to a string."
 
-                        if exists == 0:
-                            try:
-                                command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
-                                cur.execute(command)
-                            except:
-                                print "Error adding creator pair: " + command
-                        else:
-                            print "Does exist"
-                    except:
-                        print "Error checking for creating pair: " + command
+                        try:
+                            movie_ID = str(movie_ID)
+                        except:
+                            print "Error converting " , type(movie_ID) , " to a string."
+                        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
+                        try:
+                            cur.execute(command)
+                            result = cur.fetchall()[0]
+                            exists = result[0]
+                            exists = int(exists)
+
+                            if exists == 0:
+                                try:
+                                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                                    cur.execute(command)
+                                except:
+                                    print "Error adding creator pair: " + command
+                            else:
+                                print "Does exist"
+                        except:
+                            print "Error checking for creating pair: " + command
             prev = check
     
 # Right now it only returns the top 15 actors in the movie.
@@ -390,7 +423,8 @@ def getActor(movie_ID, url, title, tableTag):
             try:
                 actor = str(actor)
             except:
-                print actor
+                print "Error converting " , type(actor) , " to a string."
+                            
             try:
                 cur.execute("INSERT INTO tagTest (name, type) VALUES (%s, %s);", (actor, 'actor'))
                 actor = "'" + actor + "'"
@@ -410,25 +444,32 @@ def getActor(movie_ID, url, title, tableTag):
         for row in rows:
             tag_ID = row[0]
 
-        tag_ID = str(tag_ID)
-        movie_ID = str(movie_ID)
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
+            try:
+                tag_ID = str(tag_ID)
+            except:
+                print "Error converting " , type(tag_ID) , " to a string."
 
-            if exists == 0:
-                try:
-                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
-                    cur.execute(command)
-                except:
-                    print "Error adding actor pair: " + command
-            else:
-                return
-        except:
-            print "Error checking for actor pair: " + command
+            try:
+                movie_ID = str(movie_ID)
+            except:
+                print "Error converting " , type(movie_ID) , " to a string."
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
+            try:
+                cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
+
+                if exists == 0:
+                    try:
+                        command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                        cur.execute(command)
+                    except:
+                        print "Error adding actor pair: " + command
+                else:
+                    return
+            except:
+                print "Error checking for actor pair: " + command
         
 
 def getKeywords(movie_ID, url, title, tableTag):
@@ -438,13 +479,16 @@ def getKeywords(movie_ID, url, title, tableTag):
     html = response.content
     soup = BeautifulSoup(html)
 
-
-
     count = 0
 
     for tag in soup.findAll(attrs={"class": "sodatext"}):
         count = count + 1
-        tag = str(tag.text)
+        tag = tag.text
+        try:
+            tag = str(tag)
+        except:
+            print "Error converting " , type(tag) , " to a string."
+        
         tag = tag.replace("'", "''")
         tag = "'" + tag + "'"
         command = ("SELECT CASE WHEN EXISTS (SELECT * FROM tagTest WHERE name = " + tag + ") THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;")
@@ -481,27 +525,34 @@ def getKeywords(movie_ID, url, title, tableTag):
         for row in rows:
             tag_ID = row[0]
 
-        tag_ID = str(tag_ID)
-        movie_ID = str(movie_ID)
-        command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
-        try:
-            cur.execute(command)
-            result = cur.fetchall()[0]
-            exists = result[0]
-            exists = int(exists)
+            try:
+                tag_ID = str(tag_ID)
+            except:
+                print "Error converting " , type(tag_ID) , " to a string."
 
-            if exists == 0:
-                try:
-                    command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
-                    cur.execute(command)
-                except:
-                    print "Error adding keword pair: " + command
+            try:
+                movie_ID = str(movie_ID)
+            except:
+                print "Error converting " , type(movie_ID) , " to a string."
+            command = ("SELECT CASE WHEN EXISTS (SELECT * FROM pairingTest WHERE tag_ID = " + tag_ID + " AND movie_ID = " + movie_ID + ") THEN CAST (1 AS BIT) ELSE CAST(0 AS BIT) END;")
+            try:
+                cur.execute(command)
+                result = cur.fetchall()[0]
+                exists = result[0]
+                exists = int(exists)
+
+                if exists == 0:
+                    try:
+                        command = ("INSERT INTO pairingTest (tag_ID, movie_ID) VALUES (" + tag_ID + ", " + movie_ID + ");")
+                        cur.execute(command)
+                    except:
+                        print "Error adding keword pair: " + command
+                        return
+                else:
                     return
-            else:
+            except:
+                print "Error checking for keyword pair: " + command
                 return
-        except:
-            print "Error checking for keyword pair: " + command
-            return
 
 
 
