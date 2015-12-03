@@ -16,7 +16,7 @@
         	<li class="profile"><a href="PickAFlickProfile.php">My Profile</a></li>
             <li class="pick"><a href="PickAFlickPick.php">Pick</a></li>
         	<li class="help"><a href="#">Help</a></li>
-            
+            <li>
 			<form>
                    <input type="text" placeholder="Search..." required>
                    <input type="button" value="Search">
