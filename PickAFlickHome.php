@@ -27,7 +27,7 @@
   
   <h2> Welcome to Pick A Flick, a movie generator based on your personal mood and interests. </h2>
   
-  <h3> Make sure to <a href="PickAFlickPick.php">Take Your Pick!</h3>a>
+  <h3> Make sure to <a href="PickAFlickPick.php">Take Your Pick!</h3>
   
   <table style="width:100%">
 	<tr>
@@ -35,12 +35,6 @@
         <h2> Looking to get ready for the Holiday season? Check out these seasonal favorites!  </h2>
         <img src="http://www.mainelights.org/images/lights03a.gif" alt="Christmas Lights">
         
-        <!--This is where Christmas movies will be once they are scraped and put into the database-->
-        
-        </td>
-   
-		<td>
-			
 		<?php 
 		// checks if query can be executed 
 		function error_check($query_result) {
@@ -91,6 +85,12 @@
 		$row = mysql_fetch_array($result);
 		
 		?>
+        
+        SELECT tagtest.name, pairingtest.movie_id, movtest.title FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name LIKE '%christmas%' AND pairingtest.movie_id = movtest.id;
+	
+        </td>
+   
+		<td>
 		
 		<h3> This month's top 5 movies: </h3>
 		<div class="container">
