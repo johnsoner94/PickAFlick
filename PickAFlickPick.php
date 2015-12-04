@@ -38,7 +38,7 @@
 	}
 	
 	// Connect to MySQL
-	$db = mysql_connect("localhost", "ag249083", "ag249083");
+	$db = mysql_connect("localhost", "ej248960", "ej248960");
 	if (!db) {
 		print "Error - Could not Connect to MySQL";
 		exit;
@@ -67,21 +67,54 @@
 	}
 	?>
 
+<script type="text/javascript" src="http://ajax.googleapis.com/
+ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$(".genre").change(function()
+	{
+		var selectedGenre=$(this).val();
+		var dataString = 'selectedGenre='+ selectedGenre;
+
+		$.ajax
+		(
+			{
+				type: "POST",
+				url: "ajax_subgenre.php",
+				data: dataString,
+				cache: false,
+				success: function(html)
+				{
+					$(".subgenre").html(html);
+				} 
+			});
+
+	});
+
+});
+</script>
+
 
 <form action="movieResults3.php" method="post" id = "movie" class="pick">
 
 	<h4>I want to watch a... <h4>
-	<select name ="question1" form="movie" >
+	<select name ="question1" form="movie" class="genre">
 	<option value = ""> Select your genre </option> 
 		<?php
-		$query = "SELECT name FROM tagtest WHERE type LIKE '%genre%' ORDER BY name ASC" ;
+		$query = "SELECT name FROM tagtest WHERE type = 'genre'" ;
 		$result = mysql_query($query);
 		error_check($result);
 		runQuery($result);
 		?>
+	</select> <br/><br/>
+	
+	<h4>With a some bit of... <h4>
+	<select name="subgenre" form="movie" class="subgenre">
+	<option selected=""> Select your subgenre </option>
 	</select>
 				
-<br/><input type="submit"/>
+	<br/><input type="submit"/>
 
 	</form>
 	
