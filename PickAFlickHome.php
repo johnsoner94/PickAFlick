@@ -86,7 +86,7 @@
 		
 		?>
         
-        SELECT tagtest.name, pairingtest.movie_id, movtest.title FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name LIKE '%christmas%' AND pairingtest.movie_id = movtest.id;
+        SELECT DISTINCT tagtest.name, pairingtest.movie_id, movtest.title, tagtest.type FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND tagtest.name = 'Christmas' AND pairingtest.movie_id = movtest.id AND tagtest.type = 'subgenre'
 	
         </td>
    
