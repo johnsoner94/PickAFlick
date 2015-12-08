@@ -52,7 +52,7 @@ if (!$er) {
 
 	<h2> Welcome to Pick A Flick, a movie generator based on your personal mood and interests. </h2>
 
-	<h3> Make sure to <a href="PickAFlickPick.php">Take Your Pick!</h3>
+	<h3> Make sure to <a href="PickAFlickPick.php">Take Your Pick!</a></h3>
 				
 <?php
 if (!empty($_REQUEST['term'])) {
