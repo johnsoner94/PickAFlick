@@ -85,9 +85,9 @@
 	<select name ="question2" form="movie" >
 	<?php
 	session_start();
-	$_SESSION['question1'] = $_POST['question1'];
 	$_SESSION['subgenre'] = $_POST['subgenre'];
-	$query = "SELECT DISTINCT movtest.rating FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND tagtest.name = '".$_SESSION['question1']."' ORDER BY movtest.rating ASC";
+	$_SESSION['question1'] = $_POST['question1'];
+	$query = "SELECT DISTINCT movtest.rating FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND tagtest.name = '".$_SESSION['subgenre']."' ORDER BY movtest.rating ASC";
 	$result = mysql_query($query);
 	error_check($result);
 	runQuery($result);
@@ -97,8 +97,6 @@
 	<br/><input type="submit"/>
 
 	</form>
-
-	
-  
+		  
 </body>
 </html>

@@ -83,12 +83,25 @@
 	<h4>I want the decade to be...</h4>
 	<select name ="question3" form="movie" >
 	<option value = ""> select a year </option> 
+	<option value = "1920s"> 20s </option>	
+	<option value = "1930s"> 30s </option>
+	<option value = "1940s"> 40s </option>
+	<option value = "1950s"> 50s </option>
+	<option value = "1960s"> 60s </option>
+	<option value = "1970s"> 70s </option>
+	<option value = "1980s"> 80s </option>
+	<option value = "1990s"> 90s </option>
+	<option value = "2000s"> 2000s </option>
+	<option value = "recently"> recent </option>
+
+
+
+
 		<?php
 		session_start();
-		$_SESSION['question2'] = $_POST["question2"];
+		$_SESSION['question2'] = $_POST['question2'];
 
-	
-		$query = "SELECT DISTINCT movtest.year FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name = '".$_SESSION['question1']."' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' ORDER BY movtest.year";
+		$query = "SELECT DISTINCT movtest.year FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name = '".$_SESSION['subgenre']."' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' ORDER BY movtest.year";
 		$result = mysql_query($query);
 		error_check($result);
 		runQuery($result);
@@ -98,6 +111,6 @@
 	</form>
 
 
-  
+
 </body>
 </html>

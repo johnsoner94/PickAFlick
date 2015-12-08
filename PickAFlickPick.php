@@ -6,6 +6,10 @@
 <link href="PickAFlick.css" rel="stylesheet" type="text/css">
 </head>
 
+<script type="text/javascript" src="http://ajax.googleapis.com/
+ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+
 <body>
   <header>
 	<h1 class='retroshadow'> Pick A Flick </h1> 
@@ -27,6 +31,7 @@
     </div>
   </header> 
 <?php
+
 	// checks if query can be executed 
 	function error_check($query_result) {
 		if(!$query_result) {
@@ -93,10 +98,13 @@ $(document).ready(function()
 	});
 
 });
+
+
 </script>
 
 
 <form action="movieResults3.php" method="post" id = "movie" class="pick">
+
 
 	<h4>I want to watch a... <h4>
 	<select name ="question1" form="movie" class="genre">
@@ -113,6 +121,9 @@ $(document).ready(function()
 	<select name="subgenre" form="movie" class="subgenre">
 	<option selected=""> Select your subgenre </option>
 	</select>
+	
+
+
 				
 	<br/><input type="submit"/>
 

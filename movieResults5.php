@@ -59,7 +59,7 @@
 	}
 	
 
-	$_SESSION['question3'] = $_POST["question3"];
+	
 	
 
 	function runQuery($result){
@@ -73,7 +73,7 @@
 	$num_fields = sizeof($row);
 	
 	if($num_rows == 0) {
-		print("There are no movies that match your requirements!<br/>");
+		print("<center>There are no movies that match your requirements!<center><br/>");
 		exit;
 	}
 
@@ -100,10 +100,30 @@
 ?>
 
 		<?php
+		$_SESSION['question3'] = $_POST["question3"];
+		if ($_SESSION['question3'] == "1920s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1920 and 1930";};
+		if ($_SESSION['question3'] == "1930s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1930 and 1940";};
+		if ($_SESSION['question3'] == "1940s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1940 and 1950";};
+		if ($_SESSION['question3'] == "1950s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1950 and 1960";};
+		if ($_SESSION['question3'] == "1960s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1960 and 1970";};
+		if ($_SESSION['question3'] == "1970s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1970 and 1980";};
+		if ($_SESSION['question3'] == "1980s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1980 and 1990";};
+		if ($_SESSION['question3'] == "1990s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1990 and 2000";};
+		if ($_SESSION['question3'] == "2000s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 2000 and 2010";};
+		if ($_SESSION['question3'] == "recently") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 2010 and 2016";};
+
+		
+		
+		
+		
 		print "<center> ";
+		
+		
+		
 		echo "You want to watch a ".$_SESSION['question1']." with some ".$_SESSION['subgenre']." that was rated ".$_SESSION['question2']." and was released in ".$_SESSION['question3'].".";
+		
 		print "</center>";
-		$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name = '".$_SESSION['question1']."' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year = '".$_SESSION['question3']."'";
+		
 		$result = mysql_query($query);
 		error_check($result);
 		runQuery($result);
