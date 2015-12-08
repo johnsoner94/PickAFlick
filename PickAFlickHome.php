@@ -77,7 +77,8 @@
 			}
 		}
 		
-		$query = "SELECT poster FROM movtest WHERE id BETWEEN 1 and 5;";
+		$query = "        
+        SELECT tagtest.name, pairingtest.movie_id, movtest.title FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name LIKE '%christmas%' AND pairingtest.movie_id = movtest.id";
 		$result = mysql_query($query);
 		error_check($result);
 		//runQuery($result);
@@ -85,8 +86,7 @@
 		$row = mysql_fetch_array($result);
 		
 		?>
-        
-        SELECT tagtest.name, pairingtest.movie_id, movtest.title FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name LIKE '%christmas%' AND pairingtest.movie_id = movtest.id;
+
 	
         </td>
    
