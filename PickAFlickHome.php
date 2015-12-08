@@ -122,17 +122,11 @@ if (!empty($_REQUEST['term'])) {
         SELECT tagtest.name, pairingtest.movie_id, movtest.title FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name LIKE '%christmas%' AND pairingtest.movie_id = movtest.id";
 		$result = mysql_query($query);
 		error_check($result);
-		//runQuery($result);
+		runQuery($result);
 		
 		$row = mysql_fetch_array($result);
 		
 		?>
-<<<<<<< HEAD
-
-=======
-        
-        SELECT DISTINCT tagtest.name, pairingtest.movie_id, movtest.title, tagtest.type FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND tagtest.name = 'Christmas' AND pairingtest.movie_id = movtest.id AND tagtest.type = 'subgenre';
->>>>>>> origin/master
 	
         </td>
    
