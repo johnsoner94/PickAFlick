@@ -27,6 +27,7 @@
     </div>
   </header> 
 
+
   
 	<?php 
 	
@@ -78,6 +79,9 @@
 
 <form action="movieResults5.php" method="post" id = "movie" class="pick">
 
+  <form action="movieResults5.php" method="post" id = "movie" class="pick">
+
+
 	<h4>I want the decade to be...</h4>
 	<select name ="question3" form="movie" >
 	<option value = ""> select a year </option> 
@@ -95,6 +99,7 @@
 
 
 
+
 		<?php
 		session_start();
 		$_SESSION['question2'] = $_POST['question2'];
@@ -103,6 +108,7 @@
 		error_check($result);
 		runQuery($result);
 		?>
+
 	</select>
 	<br/><input type="submit"/>
 	</form>
