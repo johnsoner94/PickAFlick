@@ -58,10 +58,8 @@
 		exit;
 	}
 	
-
 	
 	
-
 	function runQuery($result){
 		
 	
@@ -76,10 +74,8 @@
 		print("<center>There are no movies that match your requirements!<center><br/>");
 		exit;
 	}
-
 	// Produce the column labels
 	
-
 	
 	//print "</tr>";
 	
@@ -92,7 +88,6 @@
 			$row = mysql_fetch_array($result);
 		}
 	}
-
 	}
  
  
@@ -111,7 +106,6 @@
 		if ($_SESSION['question3'] == "1990s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 1990 and 2000";};
 		if ($_SESSION['question3'] == "2000s") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 2000 and 2010";};
 		if ($_SESSION['question3'] == "recently") {$query = "SELECT DISTINCT movtest.poster FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' AND movtest.year BETWEEN 2010 and 2016";};
-
 		
 		
 		

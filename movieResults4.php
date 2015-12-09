@@ -55,9 +55,7 @@
 		exit;
 	}
 	
-
 	
-
 	function runQuery($result){
 	$row = mysql_fetch_array($result);
 	$num_fields = sizeof($row);
@@ -100,7 +98,6 @@
 		<?php
 		session_start();
 		$_SESSION['question2'] = $_POST['question2'];
-
 		$query = "SELECT DISTINCT movtest.year FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name = '".$_SESSION['subgenre']."' AND pairingtest.movie_id = movtest.id AND movtest.rating = '".$_SESSION['question2']."' ORDER BY movtest.year";
 		$result = mysql_query($query);
 		error_check($result);

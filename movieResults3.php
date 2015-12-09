@@ -30,9 +30,7 @@
 
   
 	<?php 
-
 	
-
 	// checks if query can be executed 
 	function error_check($query_result) {
 		if(!$query_result) {
