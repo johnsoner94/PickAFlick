@@ -5,8 +5,6 @@
 <title>Pick A Flick!</title>
 <link href="PickAFlick.css" rel="stylesheet" type="text/css">
 </head>
-<<<<<<< HEAD
-=======
  
 <body>
   <header>
@@ -77,7 +75,6 @@ if (!empty($_REQUEST['term'])) {
         <h2> Looking to get ready for the Holiday season? Check out these seasonal favorites!  </h2>
         <img src="http://www.mainelights.org/images/lights03a.gif" alt="Christmas Lights">
         
->>>>>>> origin/master
 		<?php 
 		// checks if query can be executed 
 		function error_check($query_result) {
@@ -120,18 +117,16 @@ if (!empty($_REQUEST['term'])) {
 			}
 		}
 		
-<<<<<<< HEAD
-=======
+
 		$query = "        
         SELECT tagtest.name, pairingtest.movie_id, movtest.title FROM tagtest, pairingtest, movtest WHERE pairingtest.tag_id = tagtest.id AND name LIKE '%christmas%' AND pairingtest.movie_id = movtest.id";
 		$result = mysql_query($query);
 		error_check($result);
 		runQuery($result);
->>>>>>> origin/master
 		
 		
 		?>
-<<<<<<< HEAD
+
 
 
 <body>
@@ -245,9 +240,7 @@ if (!empty($_REQUEST['term'])) {
 		   </div>
 		</div>
 		
-=======
-	
->>>>>>> origin/master
+
         </td>
    
 		<td>
