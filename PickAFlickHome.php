@@ -86,7 +86,7 @@ Programming Languages: HTML, PHP , SQL, CSS
 		error_check($result);
 		$row = mysql_fetch_array($result);
 ?>
-		// create a table
+		<!--create a table-->
 		<table align="center">
 			<tr>
 				<td>
