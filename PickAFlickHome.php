@@ -119,6 +119,7 @@ Programming Languages: HTML, PHP , SQL, CSS
 				</td>
 			</tr>
 			<tr>
+<<<<<<< Updated upstream
 				<td align="center">
 				</td>
 			</tr>
@@ -130,6 +131,38 @@ Programming Languages: HTML, PHP , SQL, CSS
 				 reset($row);
 				 ?>
  		</div>
+=======
+				<td>
+				 <?php
+				 print "<img src=' $row[0]' alt='Christmas5' height=360px width=230px /> ";
+				 $row = mysql_fetch_array($result);
+				 reset($row);
+				 ?>
+				</td>
+				<td>
+				 <?php
+				 print "<img src=' $row[0]' alt='Christmas6' height=360px width=230px /> ";
+				 $row = mysql_fetch_array($result);
+				 reset($row);
+				 ?>
+				</td>
+				<td>
+				 <?php
+				 print "<img src=' $row[0]' alt='Christmas7' height=360px width=230px /> ";
+				 $row = mysql_fetch_array($result);
+				 reset($row);
+				 ?>
+				</td>
+				<td>
+				 <?php
+				 print "<img src=' $row[0]' alt='Christmas8' height=360px width=230px /> ";
+				 $row = mysql_fetch_array($result);
+				 reset($row);
+				 ?>
+				</td>
+			</tr>
+		</table>
+>>>>>>> Stashed changes
         </td>
 		<td>
 		<?php
