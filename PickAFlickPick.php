@@ -20,7 +20,6 @@ Programming Languages: HTML, PHP , SQL, CSS
 <script type="text/javascript" src="http://ajax.googleapis.com/
 ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <body>
-  <!--Embeds Header-->
   <header>
 	<h1 class='retroshadow'> Pick A Flick </h1> 
         <!--The following code implements a header-->
