@@ -4,7 +4,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color:#e7e5e4; 
+  background-color:#D5D5D6; 
 }
 
 /*Code for the header text */
@@ -19,7 +19,7 @@ h1 {
 }
 h1.retroshadow {
   color: #1996B5;
-  background-color: #e7e5e4;
+  background-color: #D5D5D6;
   letter-spacing: .24em;
   text-shadow: 4px 4px 0px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.2);
 }
@@ -31,17 +31,17 @@ h1:hover {
 /* Code for all other text */ 
 h2 {
 	font-family: "Avant Garde", sans-serif;
-	color: #FFF;
+	color: #F4FCFE;
 	font-size: 25px;
 	text-align: center;
-	text-shadow:4px 4px 0px #d5d5d5;
+	text-shadow:2px 2px 0px #6A6A6A;
 }
 
 h3 {
 	font-family: "Avant Garde", sans-serif;
-	color: #A4E3F2;
+	color: #E8F8FC;
 	text-align: center;
-	text-shadow:2px 2px 0px #FFF;
+	text-shadow:2px 2px 0px #6A6A6A;
 }
 
 h4 {
