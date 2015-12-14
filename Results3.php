@@ -20,7 +20,7 @@ Programming Languages: HTML, PHP , SQL, CSS
 <body>
 <!--Embeds Header-->
   <header>
-	<h1 class='retroshadow'> Pick A Flick </h1> 
+	<h1 class='retroshadow'><a href="PickAFlickHome.php"> Pick A Flick </a> </h1> 
         <div class="nav">
       	<ul>
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>
@@ -29,7 +29,7 @@ Programming Languages: HTML, PHP , SQL, CSS
         	<li class="help"><a href="#">Help</a></li>
             <li>
 			<form>
-				<!--The following code implements a search bar-->						
+				<!--The following code implements a search 				bar-->						
                 <input type="text" placeholder="Search..." required>
                 <input type="button" value="Search">
 			</form>				
@@ -38,7 +38,7 @@ Programming Languages: HTML, PHP , SQL, CSS
     </div>
   </header> 
   <h2> Your Results </h2>
-  <?php 
+  <h3><?php 
    
    // Gets session variables from previous page
    session_start();
@@ -146,7 +146,7 @@ Programming Languages: HTML, PHP , SQL, CSS
 	$result = mysql_query($query);
 	error_check($result);
 	results($result);	
-	?>
+	?> </h3>
 
 
 </body>

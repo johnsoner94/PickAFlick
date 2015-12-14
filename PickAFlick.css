@@ -7,7 +7,8 @@ body {
   background-color:#D5D5D6; 
 }
 
-/*Code for the header text */
+/*Code for the header text, will zoom in when the user gets to
+the page. Changes color when hovered over. */
 h1 {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   font-size: 92px;
@@ -39,9 +40,9 @@ h2 {
 
 h3 {
 	font-family: "Avant Garde", sans-serif;
-	color: #E8F8FC;
+	color: #6A6A6A;
 	text-align: center;
-	text-shadow:2px 2px 0px #6A6A6A;
+	text-shadow:2px 2px 0px #E8F8FC;
 }
 
 h4 {
@@ -49,6 +50,17 @@ h4 {
 	color: #1996B5;
 	text-align: center;
 	font-size: 23px;	
+}
+
+/* Code to style final results page PHP text. Without it,
+the text will be the default black Times New Roman that "echo"
+will return */
+
+p.phpText {
+	font-family: "Avant Garde", sans-serif;
+	color: #E8F8FC;
+	text-align: center;
+	text-shadow:2px 2px 0px #6A6A6A;
 }
 
 
