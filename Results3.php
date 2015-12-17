@@ -38,6 +38,7 @@ Programming Languages: HTML, PHP , SQL, CSS
     </div>
   </header> 
   <h2> Your Results </h2>
+  <h3>
   <?php 
    
    // Gets session variables from previous page
@@ -159,7 +160,7 @@ Programming Languages: HTML, PHP , SQL, CSS
 	error_check($result);
 	results($result);	
 	?>
-
+</h3>
 
 </body>
 </html>
