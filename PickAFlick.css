@@ -11,9 +11,14 @@ body {
   background-color:#D5D5D6; 
 }
 
+<<<<<<< HEAD
 /*Code for the header text, will zoom in when the user gets to
 the page. Changes color when hovered over. */
 
+=======
+
+/*Code for the header text */
+>>>>>>> origin/master
 h1 {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   font-size: 92px;
@@ -305,12 +310,12 @@ form {
    width: 230px;
    position: relative;
    top: 360px;
-   height: 60px; 
+   height: 53px; 
    left: 170px;
    transition: all 0.3s ease-in-out;
 }
 
-#slider .tooltip h4 {
+#slider .tooltip h5 {
    color: #fff;
    font-size: 24px;
    font-weight: 300;

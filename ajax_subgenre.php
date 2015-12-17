@@ -24,8 +24,8 @@ if (!$er) {
 	exit;
 }
 
+// Adds whatever result of the SQL commands as an HTML form option.
 function runQuery($result){
-	$genre=$_POST['selectedGenre'];
 	$row = mysql_fetch_array($result);
 	$num_fields = sizeof($row);
 	$num_rows = mysql_num_rows($result);
@@ -37,6 +37,9 @@ function runQuery($result){
 		}
 }
 
+// If the selected genre is drama then the subgenre select will populate with:
+// crime, fantasy, biography, history, romance, mystery, sci-fi, thriller, 
+// animation, war, horror, film-noir, musical, sports, and music.
 if($_POST['selectedGenre']=='Drama')
 {
 	$genre=$_POST['selectedGenre'];
@@ -102,6 +105,8 @@ if($_POST['selectedGenre']=='Drama')
 	runQuery($result);
 }
 
+// If the selected genre is action then the subgenre select will populate with:
+// crime, western fantasy, romance, sci-fi, and horror.
 elseif($_POST['selectedGenre']=='Action')
 {
 	$genre=$_POST['selectedGenre'];
@@ -131,7 +136,8 @@ elseif($_POST['selectedGenre']=='Action')
 	runQuery($result);
 }
 
-
+// If the selected genre is adventure then the subgenre select will populate with:
+// western, fantasy, biography, history, romance, sci-fi, family, animation, war, and musical.
 elseif($_POST['selectedGenre']=='Adventure')
 {
 	$genre=$_POST['selectedGenre'];
@@ -176,6 +182,9 @@ elseif($_POST['selectedGenre']=='Adventure')
 	error_check($result);
 	runQuery($result);
 }
+
+// If the selected genre is comedy then the subgenre select will populate with:
+// biography, romance, animation and musical.
 elseif($_POST['selectedGenre']=='Comedy')
 {
 	$genre=$_POST['selectedGenre'];
