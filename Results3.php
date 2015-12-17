@@ -85,7 +85,7 @@ Programming Languages: HTML, PHP , SQL, CSS
 			print("<center>There are no movies that match your requirements!<center><br/>");
 			exit;
 		}
-		
+		// create a table to display posters
 		print "<table>";
 		print "	<tbody>";
 	
