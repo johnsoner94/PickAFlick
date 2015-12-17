@@ -10,6 +10,10 @@ The beginning of the page is mostly text stylings, then code for a
 navigation bar, search bar, styled drop boxes, slide show, and styled 
 submission boxes.
 
+It should be noted that the search bar does not actually lead to anything,
+but in future phases of the project will be implemented immediately to 
+search for other users and movies.
+
 Programming Languages: CSS */
 
 body {
@@ -117,7 +121,9 @@ h4 {
 }
 
 
-/*Code for search bar that will be inserted in the navigation bar. */
+/*Code for search bar that will be inserted in the navigation bar. The search
+bar does not currently search anything. It just is serving as a placeholder 
+for future implementation. */
 form {
     width:250px;
     margin:50px auto;
