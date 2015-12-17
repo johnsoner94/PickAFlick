@@ -100,9 +100,6 @@ Programming Languages: HTML, PHP , SQL, CSS
 				
 				print "			<td> <img src='$row[$field_num]' 
 				alt='Poster Can Not Be Viewed' width='300' height='500'> </center> </td> ";
-				//print "<p>$row_num</p>";
-				//print "<br> <center> <img src='$row[$field_num]' 
-				//alt='Poster Can Not Be Viewed' width='300' height='500'> </center> <br> ";
 				$row = mysql_fetch_array($result);
 			}
 			if(($row_num+5)%4==0 && $row_num!=0){
