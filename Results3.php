@@ -85,18 +85,33 @@ Programming Languages: HTML, PHP , SQL, CSS
 			print("<center>There are no movies that match your requirements!<center><br/>");
 			exit;
 		}
-
+		
+		print "<table>";
+		print "	<tbody>";
 	
 		for($row_num = 0; $row_num < $num_rows; $row_num++) {
 			reset($row);
+			if($row_num%4==0){
+				print "		<tr>";
+			}
 			for ($field_num = 0; $field_num < $num_fields / 2; $field_num++){
 				
 				// HTML code to display poster
-				print "<br> <center> <img src='$row[$field_num]' 
-				alt='Poster Can Not Be Viewed' width='300' height='500'> </center> <br> ";
+				
+				print "			<td> <img src='$row[$field_num]' 
+				alt='Poster Can Not Be Viewed' width='300' height='500'> </center> </td> ";
+				//print "<p>$row_num</p>";
+				//print "<br> <center> <img src='$row[$field_num]' 
+				//alt='Poster Can Not Be Viewed' width='300' height='500'> </center> <br> ";
 				$row = mysql_fetch_array($result);
 			}
+			if(($row_num+5)%4==0 && $row_num!=0){
+				print "		</tr>";
+			}
 		}
+		print "		</tr>";
+		print "	</tbody>";
+		print "</table>";
 
 	}
  

@@ -40,7 +40,8 @@ Programming Languages: HTML, PHP , SQL, CSS
   
   <h2> Welcome to Pick A Flick, a movie generator based on your personal mood and interests. </h2>
   
-  <h3> Make sure to <a href="PickAFlickPick.php">Take Your Pick!</a></h3>
+  <h3> Make sure to <a href="PickAFlickPick.php" style= "color: #5BD3F8;
+	text-shadow: 2px 2px 0px #fff, 5px 5px 0px rgba(0, 0, 0, 0);">Take Your Pick!</a></h3>
   
   <table style="width:100%">
 	<tr>
@@ -86,50 +87,76 @@ Programming Languages: HTML, PHP , SQL, CSS
 		error_check($result);
 		$row = mysql_fetch_array($result);
 ?>
+<<<<<<< HEAD
 		<!--create a table-->
+=======
+>>>>>>> origin/master
 		<table align="center">
-			<tr>
-				<td>
-				 <?php // print first poster
-				 print "<img src=' $row[0]' alt='Christmas1' height=360px width=230px /> ";
-				 $row = mysql_fetch_array($result);
-				 reset($row);
-				 ?>
-				</td>
-				<td>  
-				 <?php // print second poster
- 				 print "<img src=' $row[0]' alt='Christmas2' height=360px width=230px /> ";
-				 $row = mysql_fetch_array($result);
-				 reset($row);
-				 ?>
-				</td>
-				<td>
-				 <?php // print third poster 
-				 print "<img src=' $row[0]' alt='Christmas3' height=360px width=230px /> ";
-				 $row = mysql_fetch_array($result);
-				 reset($row);
-				 ?>
-				</td>
-				<td>
-				 <?php  // print forth poster
-				 print "<img src=' $row[0]' alt='Christmas4' height=360px width=230px /> ";
-				 $row = mysql_fetch_array($result);
-				 reset($row);
-				 ?>
-				</td>
-			</tr>
-			<tr>
-				<td align="center">
-				</td>
-			</tr>
+			<tbody>
+				<tr>
+					<td>
+					 <?php // print first poster
+					 print "<img src=' $row[0]' alt='Christmas1' height=360px width=230px /> ";
+					 $row = mysql_fetch_array($result);
+					 reset($row);
+					 ?>
+					</td>
+					<td>  
+					 <?php // print second poster
+	 				 print "<img src=' $row[0]' alt='Christmas2' height=360px width=230px /> ";
+					 $row = mysql_fetch_array($result);
+					 reset($row);
+					 ?>
+					</td>
+					<td>
+					 <?php // print third poster 
+					 print "<img src=' $row[0]' alt='Christmas3' height=360px width=230px /> ";
+					 $row = mysql_fetch_array($result);
+					 reset($row);
+					 ?>
+					</td>
+					<td>
+					 <?php  // print forth poster
+					 print "<img src=' $row[0]' alt='Christmas4' height=360px width=230px /> ";
+					 $row = mysql_fetch_array($result);
+					 reset($row);
+					 ?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					 <?php // print first poster
+					 print "<img src=' $row[0]' alt='Christmas5' height=360px width=230px /> ";
+					 $row = mysql_fetch_array($result);
+					 reset($row);
+					 ?>
+					</td>
+					<td>  
+					 <?php // print second poster
+	 				 print "<img src=' $row[0]' alt='Christmas6' height=360px width=230px /> ";
+					 $row = mysql_fetch_array($result);
+					 reset($row);
+					 ?>
+					</td>
+					<td>
+					 <?php // print third poster 
+					 print "<img src=' $row[0]' alt='Christmas7' height=360px width=230px /> ";
+					 $row = mysql_fetch_array($result);
+					 reset($row);
+					 ?>
+					</td>
+					<td>
+					 <?php  // print forth poster
+					 print "<img src=' $row[0]' alt='Christmas8' height=360px width=230px /> ";
+					 $row = mysql_fetch_array($result);
+					 reset($row);
+					 ?>
+					</td>
+					
+					
+				</tr>
+			</tbody>
 		</table>
-		<div style="text-align: center">
-				 <?php  // print fifth poster 
-				 print "<img src=' $row[0]' alt='Christmas5' height=360px width=230px /> ";
-				 $row = mysql_fetch_array($result);
-				 reset($row);
-				 ?>
- 		</div>
         </td>
 		<td>
 		<?php
@@ -144,56 +171,47 @@ Programming Languages: HTML, PHP , SQL, CSS
    			<div id="content-slider">
       			<div id="slider">  <!-- Slider container -->
         			 <div id="mask">  <!-- Mask -->
-         			<ul>
-         <li id="first" class="firstanimation">  <!-- ID for tooltip and class for animation -->
-         <div class="tooltip"> <h4> #1 </h4> </div>
-         <a href="javascript: return false"> 
-			 <?php // gets first movie 
-			 print "<img src=' $row[0]' alt='George' height=360px width=230px /> ";
-			 $row = mysql_fetch_array($result);
-			 reset($row);
-			 ?>
-		 </a>
-         </li>
-         <li id="second" class="secondanimation">
-         <div class="tooltip"> <h4> #2 </h4> </div>
-         <a href="javascript: return false"> 
-			 <?php  // gets second movie 
-			 print "<img height=360px width=230px src=' $row[0] ' alt='Furry'/> ";
-			 $row = mysql_fetch_array($result);
-			 reset($row);
-			 ?>
-		 </a>
-         </li>
-         <li id="third" class="thirdanimation">
-         <div class="tooltip"> <h4> #3 </h4></div>
-         <a href="javascript: return false"> 
-			 <?php  // gets third movie 
-			 print "<img height=360px width=230px src='$row[0]' alt='breathing'/> ";
-			 $row = mysql_fetch_array($result);
-			 reset($row);
-			 ?>
-		</a>
-         </li>
-         <li id="fourth" class="fourthanimation">
-         <div class="tooltip"><h4>  #4 </h4></div>
-         <a href="javascript: return false">
-			 <?php // gets forth movie 
-			 print "<img height=360px width=230px src='$row[0]' alt='Man'/> ";
-			 $row = mysql_fetch_array($result);
-			 reset($row);
-			 ?>
-		 </a>
-         </li>
-         <li id="fifth" class="fifthanimation">
-         <div class="tooltip"><h4>  #5 </h4></div>
-         <a href="javascript: return false">
-			 <?php  // gets fifth movie 
-			 print "<img height=360px width=230px src='$row[0]' alt='Monkey'/> ";
-			 ?>
-		 </a>
-         </li>        
-         </ul>         
+	         			<ul>
+				         <li id="first" class="firstanimation">  <!-- ID for tooltip and class for animation -->
+				         <div class="tooltip"> <h5> #1 </h5> </div>
+							 <?php // gets first movie 
+							 print "<img height=360px width=230px src=' $row[0]' alt='TopFive1' /> ";
+							 $row = mysql_fetch_array($result);
+							 reset($row);
+							 ?>
+				         </li>
+				         <li id="second" class="secondanimation">
+				         <div class="tooltip"> <h5> #2 </h5> </div>
+							 <?php  // gets second movie 
+							 print "<img height=360px width=230px src=' $row[0] ' alt='TopFive2'/> ";
+							 $row = mysql_fetch_array($result);
+							 reset($row);
+							 ?>
+				         </li>
+				         <li id="third" class="thirdanimation">
+				         <div class="tooltip"> <h5> #3 </h5></div>
+							 <?php  // gets third movie 
+							 print "<img height=360px width=230px src='$row[0]' alt='TopFive3'/> ";
+			 
+							 ?>
+				         </li>
+				         <li id="fourth" class="fourthanimation">
+				         <div class="tooltip"><h5>  #4 </h5></div>
+							 <?php // gets forth movie 
+							 $row = mysql_fetch_array($result);
+							 reset($row);
+							 print "<img height=360px width=230px src='$row[0]' alt='TopFive4'/> ";
+							 ?>
+				         </li>
+				         <li id="fifth" class="fifthanimation">
+				         <div class="tooltip"><h5>  #5 </h5></div>
+							 <?php  // gets fifth movie
+							 $row = mysql_fetch_array($result);
+							 reset($row);
+							 print "<img height=360px width=230px src='$row[0]' alt='TopFive5'/> ";
+							 ?>
+				         </li>        
+	         </ul>         
          </div>  <!-- End Mask -->
          <div class="progress-bar"></div>  <!-- Progress Bar -->
       </div>  <!-- End Slider Container -->
