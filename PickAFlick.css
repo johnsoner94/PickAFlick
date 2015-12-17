@@ -1,5 +1,9 @@
 @charset "UTF-8";
-/* CSS Document */
+/* CSS Document for PickAFlick
+ 
+Authors: Mackensie Weilnau, Emily Johnson, Aliya Gangji, & Casie Ropski
+Date: December 18th, 2015
+ */
 
 body {
   margin: 0;
@@ -9,6 +13,7 @@ body {
 
 /*Code for the header text, will zoom in when the user gets to
 the page. Changes color when hovered over. */
+
 h1 {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   font-size: 92px;
@@ -112,12 +117,37 @@ p.phpText {
     margin-right: -4px;
   }
 }
-  
-/*Code for Drop Down style */
+
+
+/*Code for search bar that will be in the navigation bar. */
+form {
+    width:250px;
+    margin:50px auto;
+}
+.search {
+    padding:8px 15px;
+    background:#FFF;
+    border:0px solid #dbdbdb;
+}
+.button {
+    position:relative;
+    padding:6px 6px;
+    left:-15px;
+    border:2px solid #207cca;
+    background-color:#207cca;
+    color:#fafafa;
+}
+.button:hover  {
+    background-color:#fafafa;
+    color:#207cca;
+}
+
+/*Code for Drop Down Box style */
+
 .pick select {
-	border: 0 !important;  
-	-webkit-appearance: none;  
-	-moz-appearance: none; 
+	border: 0 !important;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 	background: #1996B5 url(img/demo/select-arrow.png) no-repeat 90% center;
 	width: 300px; 
 	text-indent: 0.01px; 
@@ -129,32 +159,10 @@ p.phpText {
 	box-shadow: inset 0 0 5px rgba(000,000,000, 0.5);
 	font-family: "Avant Garde", sans-serif;
 }
-  
-  /*Code for search bar */
-form {
-                width:250px;
-                margin:50px auto;
-}
-.search {
-                padding:8px 15px;
-                background:#FFF;
-                border:0px solid #dbdbdb;
-}
-.button {
-                position:relative;
-                padding:6px 6px;
-                left:-15px;
-                border:2px solid #207cca;
-                background-color:#207cca;
-                color:#fafafa;
-}
-.button:hover  {
-                background-color:#fafafa;
-                color:#207cca;
-}
 
 
-/* SLIDESHOW STRUCTURE */
+
+/* Code for the photo slideshow of the top 5 movies */
 
 #slider {
    background: #000;
@@ -167,14 +175,12 @@ form {
    position: relative;
 }
 
-/* HIDE ALL OUTSIDE OF THE SLIDER */
-
 #mask {
    overflow: hidden;
-   height: 360px; /* I think this is where my problem with tooltip is */
+   height: 360px; /* This piece of code solved the problem we were having with tooltip */
 }
 
-/* IMAGE LIST */
+/* Code for the 5 images/animations that the slideshow will run through*/
 
 #slider ul {
    margin: 0;
@@ -212,7 +218,7 @@ form {
 }
 
 
-/* ANIMATION */
+/* Code for the actual animation of the images. */
 
 @keyframes cycle {
    0%  { top: -93px; } /* When you start the slide, the first image is already visible */
@@ -266,7 +272,7 @@ form {
    100%{ top: 325px; opacity: 0; z-index: 0; }
 }
 
-/* PROGRESS BAR */
+/* Code for creating and animating the progress bar */
 
 .progress-bar {
    position: relative;
@@ -276,9 +282,6 @@ form {
    background: #000;
    animation: fullexpand 25s ease-out infinite;
 }
-
-
-/* PROGRESS ANIMATION BAR */
 
 @keyframes fullexpand {
    /* In these keyframes, the progress-bar is stationary */
@@ -316,7 +319,8 @@ form {
    font-family: "futura", sans-serif;
 }
 
-/*Style for submit button*/
+/* Code to style the submit button in the pick pages of the site. */
+
 input[type=text] {
     padding:5px; 
     border:2px solid #ccc; 

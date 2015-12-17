@@ -55,7 +55,7 @@
 
 <body>
   <header>
-	<h1 class='retroshadow'> Pick A Flick </h1> 
+	<h1 class='retroshadow'> Pick A Flick </h1>
         <div class="nav">
       	<ul>
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>
@@ -100,7 +100,7 @@
          			<ul>
             
 		        <li id="first" class="firstanimation">  <!-- ID for tooltip and class for animation -->
-		         <div class="tooltip"> <h4> #1 </h4> </div>
+		         <div class="tooltip"> <h2> #1 </h2> </div>
 		         <a href="#"> 
 					 <?php
 					 print "<img src=' $row[0]' alt='George' height=360px width=230px /> ";
@@ -112,7 +112,7 @@
 		         </li>
 
 		         <li id="second" class="secondanimation">
-		         <div class="tooltip"> <h4> #2 </h4> </div>
+		         <div class="tooltip"> <h2> #2 </h2> </div>
 		         <a href="#"> 
 					 <?php
 					 print "<img height=360px width=230px src=' $row[0] ' alt='Furry'/> ";
@@ -135,7 +135,7 @@
 		         </li>
 
 		         <li id="fourth" class="fourthanimation">
-		         <div class="tooltip"><h4>  #4 </h4></div>
+		         <div class="tooltip"><h3>  #4 </h3></div>
 		         <a href="#">
 					 <?php
 					 print "<img height=360px width=230px src='$row[0]' alt='Man'/> ";

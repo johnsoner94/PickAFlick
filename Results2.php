@@ -21,7 +21,7 @@ Programming Languages: HTML, PHP , SQL, CSS
 <body>
   <!--Embeds Header-->
   <header>
-	<h1 class='retroshadow'> Pick A Flick </h1> 
+	<h1 class='retroshadow'> Pick A Flick </h1>
         <div class="nav">
       	<ul>
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>

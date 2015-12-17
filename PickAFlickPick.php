@@ -21,7 +21,7 @@ Programming Languages: HTML, PHP , SQL, CSS
 ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <body>
   <header>
-	<h1 class='retroshadow'> Pick A Flick </h1> 
+	<h1 class='retroshadow'>Pick A Flick</h1>
         <!--The following code implements a header-->
         <div class="nav">
       	<ul>
