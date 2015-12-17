@@ -26,7 +26,7 @@ Programming Languages: HTML, PHP , SQL, CSS
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>
         	<li class="profile"><a href="PickAFlickProfile.php">My Profile</a></li>
             <li class="pick"><a href="PickAFlickPick.php">Pick</a></li>
-        	<li class="help"><a href="#">Help</a></li>
+        	<li class="help"><a href="PickAFlickHelp.php">Help</a></li>
             <li>
 			<form>
 				<!--The following code implements a search 				bar-->						
@@ -38,12 +38,9 @@ Programming Languages: HTML, PHP , SQL, CSS
     </div>
   </header> 
   <h2> Your Results </h2>
-<<<<<<< HEAD
-  <h3><?php 
-=======
   <h3>
   <?php 
->>>>>>> origin/master
+
    
    // Gets session variables from previous page
    session_start();
@@ -163,13 +160,11 @@ Programming Languages: HTML, PHP , SQL, CSS
 	$result = mysql_query($query);
 	error_check($result);
 	results($result);	
-<<<<<<< HEAD
-	?> </h3>
 
-=======
+
 	?>
 </h3>
->>>>>>> origin/master
+
 
 </body>
 </html>

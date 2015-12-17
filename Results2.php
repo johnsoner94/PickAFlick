@@ -27,7 +27,7 @@ Programming Languages: HTML, PHP , SQL, CSS
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>
         	<li class="profile"><a href="PickAFlickProfile.php">My Profile</a></li>
             <li class="pick"><a href="PickAFlickPick.php">Pick</a></li>
-        	<li class="help"><a href="#">Help</a></li>
+        	<li class="help"><a href="PickAFlickHelp.php">Help</a></li>
             <li>
 			<form>
 			 <!--The following code implements a search bar-->			

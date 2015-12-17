@@ -25,7 +25,8 @@ Programming Languages: HTML, PHP , SQL, CSS
       	<ul>
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>
         	<li class="profile"><a href="PickAFlickProfile.php">My Profile</a></li>
-        	<li class="help"><a href="#">Help</a></li>
+			<li class="pick"><a href="PickAFlickPick.php">Pick</a></li>
+        	<li class="help"><a href="PickAFlickHelp.php">Help</a></li>
 			<li>
 				<form>
                     <input type="text" placeholder="Search..." required>
@@ -37,6 +38,8 @@ Programming Languages: HTML, PHP , SQL, CSS
   </header> 
   
   <h2> My Profile </h2>
+  
+  <h3> COMING SOON! </h3>
   
 </body>
 </html>

@@ -1,9 +1,16 @@
 @charset "UTF-8";
 /* CSS Document for PickAFlick
- 
-Authors: Mackensie Weilnau, Emily Johnson, Aliya Gangji, & Casie Ropski
-Date: December 18th, 2015
- */
+
+Class: CSI:210 Software Engineering
+Team Members: Emily Johnson, Aliya Gangji, Casie Ropski, Mackensie Weilnau
+Date: November-December of 2015
+
+Description: The following page was our stylesheet for the entire website. 
+The beginning of the page is mostly text stylings, then code for a 
+navigation bar, search bar, styled drop boxes, slide show, and styled 
+submission boxes.
+
+Programming Languages: CSS */
 
 body {
   margin: 0;
@@ -11,14 +18,11 @@ body {
   background-color:#D5D5D6; 
 }
 
-<<<<<<< HEAD
+
 /*Code for the header text, will zoom in when the user gets to
 the page. Changes color when hovered over. */
 
-=======
 
-/*Code for the header text */
->>>>>>> origin/master
 h1 {
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   font-size: 92px;
@@ -39,7 +43,7 @@ h1:hover {
   color: #5BD3F8;
 }
  
-/* Code for all other text */ 
+/* Code for all other text, just stylistic things */ 
 h2 {
 	font-family: "Avant Garde", sans-serif;
 	color: #F4FCFE;
@@ -60,17 +64,6 @@ h4 {
 	color: #1996B5;
 	text-align: center;
 	font-size: 23px;	
-}
-
-/* Code to style final results page PHP text. Without it,
-the text will be the default black Times New Roman that "echo"
-will return */
-
-p.phpText {
-	font-family: "Avant Garde", sans-serif;
-	color: #E8F8FC;
-	text-align: center;
-	text-shadow:2px 2px 0px #6A6A6A;
 }
 
 
@@ -124,7 +117,7 @@ p.phpText {
 }
 
 
-/*Code for search bar that will be in the navigation bar. */
+/*Code for search bar that will be inserted in the navigation bar. */
 form {
     width:250px;
     margin:50px auto;
@@ -185,7 +178,7 @@ form {
    height: 360px; /* This piece of code solved the problem we were having with tooltip */
 }
 
-/* Code for the 5 images/animations that the slideshow will run through*/
+/* Code for the 5 images/animations that the slideshow will run through */
 
 #slider ul {
    margin: 0;
@@ -228,9 +221,9 @@ form {
 @keyframes cycle {
    0%  { top: -93px; } /* When you start the slide, the first image is already visible */
    4%  { top: -93px; } /* Original Position */
-   16% { top: -93px; opacity:1; z-index:0; } /* From 4% to 16 % = for 3 seconds the image is visible */
-   20% { top: 300px; opacity: 0; z-index: 0; } /* From 16% to 20% = for 1 second exit image */
-   21% { top: -300px; opacity: 0; z-index: -1; } /* Return to Original Position */
+   16% { top: -93px; opacity:1; z-index:0; } 
+   20% { top: 300px; opacity: 0; z-index: 0; } 
+   21% { top: -300px; opacity: 0; z-index: -1; }
    92% { top: -300px; opacity: 0; z-index: 0; }
    96% { top: -300px; opacity: 0; } /* From 96% to 100% = for 1 second enter image*/
    100%{ top: 0px; opacity: 1; }
@@ -240,10 +233,10 @@ form {
    0%  { top: -323px; opacity: 0; } /* Original Position */
    16% { top: -323px; opacity: 0; }/* Starts moving after 16% to this position */
    20% { top: -93px; opacity: 1; }
-   24% { top: -93px; opacity: 1; }  /* From 20% to 24% = for 1 second enter image*/
-   36% { top: -93px; opacity: 1; z-index: 0; }   /* From 24% to 36 % = for 3 seconds the image is visible */
-   40% { top: 323px; opacity: 0; z-index: 0; } /* From 36% to 40% = for 1 second exit image */
-   41% { top: -323px; opacity: 0; z-index: -1; }   /* Return to Original Position */
+   24% { top: -93px; opacity: 1; } 
+   36% { top: -93px; opacity: 1; z-index: 0; }   
+   40% { top: 323px; opacity: 0; z-index: 0; } 
+   41% { top: -323px; opacity: 0; z-index: -1; }   /* Return to Original Position. This pattern continues */
    100%{ top: -323px; opacity: 0; z-index: -1; }
 }
 
@@ -277,7 +270,7 @@ form {
    100%{ top: 325px; opacity: 0; z-index: 0; }
 }
 
-/* Code for creating and animating the progress bar */
+/* Code for creating and animating the progress bar at the bottom of the slideshow */
 
 .progress-bar {
    position: relative;

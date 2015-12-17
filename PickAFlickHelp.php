@@ -23,7 +23,8 @@ Programming Languages: HTML, PHP , SQL, CSS
       	<ul>
         	<li class="home"><a href="PickAFlickHome.php">Home</a></li>
         	<li class="profile"><a href="PickAFlickProfile.php">My Profile</a></li>
-        	<li class="help"><a href="#">Help</a></li>
+			<li class="pick"><a href="PickAFlickPick.php">Pick</a></li>
+        	<li class="help"><a href="PickAFlickHelp.php">Help</a></li>
 			<li>
 	            <!--The following code implements a search bar-->
 				<form>
@@ -35,7 +36,9 @@ Programming Languages: HTML, PHP , SQL, CSS
     </div>
   </header> 
   
-  <h2> Help </h2>
+  <h2> Any questions? </h2>
+  
+  <h3> UNDER CONSTRUCTION! </h3>
   
 </body>
 </html>
